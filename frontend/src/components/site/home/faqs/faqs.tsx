@@ -1,0 +1,82 @@
+import { FaqCategory } from "@/interfaces/FaqCategory";
+import { Disclosure } from "@headlessui/react";
+import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
+
+const faqs = [
+  {
+    question: "Como funciona para fazer o orçamento?",
+    answer:
+      "Você escolhe o produto desejado, entra em contato conosco através do nosso Whatsapp ou Email e fazemos o orçamento para você.",
+  },
+  {
+    question: "Como funciona o frete?",
+    answer:
+      "Depois de terminarmos o produto, pesamos e enviamos para o endereço que conversamos através das mensagens.",
+  },
+];
+
+interface FaqsProps {
+  faqCategories: FaqCategory[];
+}
+
+export default function Faqs({ faqCategories }: FaqsProps) {
+  return (
+    <div className="bg-white">
+      <div className="px-6 py-24 sm:py-32 lg:px-8 lg:py-6">
+        <div className=" divide-y divide-capim-seco/10">
+          <h2 className="text-2xl font-bold leading-10 tracking-tight text-capim-seco">
+            Perguntas mais frequentes
+          </h2>
+          {faqCategories.length ? (
+            faqCategories.map((faqCategory) => (
+              <div key={faqCategory.id}>
+                <p className="mt-10 text-xl font-bold text-capim-seco">
+                  {faqCategory.name}
+                </p>
+                <dl className=" space-y-6 divide-y divide-gray-900/10">
+                  {faqCategory.faqs.map((faq) => (
+                    <Disclosure as="div" key={faq.question} className="pt-6">
+                      {({ open }) => (
+                        <>
+                          <dt>
+                            <Disclosure.Button className="flex w-full items-start justify-between text-left text-capim-seco">
+                              <span className="text-base font-semibold leading-7">
+                                {faq.question}
+                              </span>
+                              <span className="ml-6 flex h-7 items-center">
+                                {open ? (
+                                  <MinusSmallIcon
+                                    className="h-6 w-6"
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <PlusSmallIcon
+                                    className="h-6 w-6"
+                                    aria-hidden="true"
+                                  />
+                                )}
+                              </span>
+                            </Disclosure.Button>
+                          </dt>
+                          <Disclosure.Panel as="dd" className="mt-2 pr-12">
+                            <p className="text-base leading-7 text-capim-seco">
+                              {faq.answer}
+                            </p>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
+                </dl>
+              </div>
+            ))
+          ) : (
+            <p className="pt-4 text-lg text-capim-seco">
+              Nenhuma pergunta cadastrada
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

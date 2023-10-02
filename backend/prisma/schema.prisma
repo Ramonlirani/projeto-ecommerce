@@ -1,0 +1,223 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model EmailVerification {
+  id        String    @id @default(uuid())
+  email     String    @unique() @db.VarChar(255)
+  code      String    @unique() @db.VarChar(255)
+  createdAt DateTime? @default(now()) @map("created_at")
+
+  @@map("email_verifications")
+}
+
+model FaqCategory {
+  id   String @id @default(uuid())
+  name String
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updateAt  DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  faqs Faq[]
+
+  @@map("faq_catories")
+}
+
+model Faq {
+  id        String    @id @default(uuid())
+  question  String    @db.VarChar(255)
+  answer    String    @db.Text
+  active    Boolean   @default(true)
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  faqCategoryId String      @map("faq_category_id")
+  faqCategory   FaqCategory @relation(fields: [faqCategoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_faq_categories_faqs1")
+
+  @@index([faqCategoryId], map: "fk_faq_category_faq_idx")
+  @@map("faqs")
+}
+
+model File {
+  id           String    @id @default(uuid())
+  name         String    @db.Text
+  path         String    @db.Text
+  size         Int       @default(0)
+  extension    String    @db.VarChar(10)
+  fileableType String    @map("fileable_type")
+  fileableId   String    @map("fileable_id")
+  active       Boolean   @default(true)
+  createdAt    DateTime? @default(now()) @map("created_at")
+
+  @@map("files")
+}
+
+model Role {
+  id   String @id @default(uuid())
+  name String @unique()
+  code String @unique()
+
+  users User[]
+
+  permissions PermissionRole[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id     String @id @default(uuid())
+  action String @db.VarChar(255)
+
+  menuItemId String   @map("menu_item_id")
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_permissions_has_menu_item")
+
+  roles PermissionRole[]
+
+  @@index([menuItemId], map: "fk_permissions_has_menu_item_idx")
+  @@map("permissions")
+}
+
+model PermissionRole {
+  allowed Boolean @default(false)
+
+  roleId String @map("role_id")
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_role_has_permissions_1")
+
+  permissionId String     @map("permission_id")
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_permission_has_role1")
+
+  @@id([permissionId, roleId])
+  @@index([roleId], map: "fk_role_has_permissions_1_idx")
+  @@index([permissionId], map: "fk_permission_has_role1_idx")
+  @@map("permission_role")
+}
+
+model ProductCategory {
+  id   String @id @default(uuid())
+  name String
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updateAt  DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  active    Boolean   @default(true)
+
+  subcategories Subcategory[]
+  products      Product[]
+
+  @@map("product_categories")
+}
+
+model Product {
+  id               String  @id @default(uuid())
+  name             String  @db.VarChar(255)
+  price            Int
+  description      String
+  shortDescription String  @map("short_description")
+  active           Boolean @default(true)
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updateAt  DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  productCategoryId String               @map("product_category_id")
+  category          ProductCategory      @relation(fields: [productCategoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_product_categories_products")
+  subcategories     ProductSubcategory[]
+
+  @@index([productCategoryId], map: "product_category_idx")
+  @@map("products")
+}
+
+model ProductSubcategory {
+  productId String  @map("product_id")
+  product   Product @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_product_products")
+
+  subCategoryId String      @map("sub_categories_id")
+  SubCategory   Subcategory @relation(fields: [subCategoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_product_subcategories")
+
+  @@id([productId, subCategoryId])
+  @@index([productId], map: "fk_product_product_idx")
+  @@index([subCategoryId], map: "fk_subcategory_idx")
+  @@map("product_subcategory")
+}
+
+model Subcategory {
+  id     String  @id @default(uuid())
+  name   String  @db.VarChar(255)
+  active Boolean @default(true)
+
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  productCategoryId String               @map("product_category_id")
+  productCategory   ProductCategory      @relation(fields: [productCategoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_product_categories_subcategory")
+  products          ProductSubcategory[]
+
+  @@index([productCategoryId], map: "product_category_subcategory_idx")
+  @@map("sub_categories")
+}
+
+model MenuItem {
+  id         String  @id @default(uuid())
+  idFather   String? @map("id_father")
+  name       String  @db.VarChar(255)
+  modelName  String? @map("model_name") @db.VarChar(255)
+  target     String  @default("_self")
+  webUrl     String  @map("web_url") @db.VarChar(255)
+  webUrlBase String? @map("web_url_base") @db.VarChar(255)
+  icon       String? @db.VarChar(255)
+  order      Int
+  visible    Boolean @default(true)
+  active     Boolean @default(true)
+
+  permissions Permission[]
+
+  @@map("menu_items")
+}
+
+model ResetPassword {
+  id        String    @id @default(uuid())
+  email     String    @unique() @db.VarChar(255)
+  token     String    @unique() @db.VarChar(255)
+  expireIn  DateTime? @map("expire_in")
+  createdAt DateTime? @default(now()) @map("created_at")
+
+  @@map("reset_passwords")
+}
+
+model User {
+  id             String    @id @default(uuid())
+  name           String    @db.VarChar(255)
+  email          String    @unique() @db.VarChar(255)
+  username       String?   @db.VarChar(255)
+  phoneNumber    String?   @map("phone_number")
+  document       String?
+  perfilPhotoUrl String?   @map("perfil_photo_url")
+  password       String    @db.VarChar(255)
+  active         Boolean   @default(true)
+  roleCode       String    @default("client") @db.VarChar(15)
+  verifiedAt     DateTime? @map("verified_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updateAt       DateTime? @updatedAt @map("updated_at")
+  deletedAt      DateTime? @map("deleted_at")
+  lastLogin      DateTime? @map("last_login")
+
+  roleId String @map("role_id")
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_has_role1")
+
+  @@index([roleId], map: "fk_user_has_roles1_idx")
+  @@map("users")
+}
+
+model Configuration {
+  key   String @unique
+  value String @db.Text
+
+  @@map("configurations")
+}

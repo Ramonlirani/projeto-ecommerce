@@ -1,0 +1,13 @@
+{
+  "name": "recordar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compose:up:dev": "(docker-compose -f docker-compose.dev.yml up -d --build)",
+    "compose:down:dev": "(docker-compose -f docker-compose.dev.yml down --remove-orphans --volumes)"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
