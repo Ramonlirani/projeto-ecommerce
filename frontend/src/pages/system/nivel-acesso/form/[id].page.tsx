@@ -14,10 +14,10 @@ import { NextPageWithLayout } from "@/interfaces/NextPageWithLayout";
 import { Role } from "@/interfaces/Role";
 
 import { Layout } from "@/components/system/layout";
-import { Input } from "@/components/input";
-import { Button } from "@/components/button";
-import { PageTitle } from "@/components/page-title";
-import { Checkbox } from "@/components/checkbox";
+import { Input } from "@/components/shared/input";
+import { Button } from "@/components/shared/button";
+import { PageTitle } from "@/components/shared/page-title";
+import { Checkbox } from "@/components/shared/checkbox";
 import { getHeaders } from "@/helpers/get-headers";
 import fetchJson from "@/lib/fetch-json";
 

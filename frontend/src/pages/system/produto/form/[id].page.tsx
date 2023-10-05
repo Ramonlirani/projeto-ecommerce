@@ -56,7 +56,6 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
 
   const isEditing = get(product, "id");
   const [subcategories, setSubcategories] = useState([]);
-  console.log("subcategories", subcategories);
 
   const methods = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -96,12 +95,17 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
   }, [watch("productCategoryId")]);
 
   async function onSubmit(formData: FormData) {
+    const newPrice = get(formData, "price", 0);
+
+    formData.price = newPrice * 100;
+
     const response = await createOrUpdate({
       currentEntity: product,
       formData,
       entityName: "Produto",
       url,
     });
+    console.log(response);
 
     if (get(response, "error", false)) {
       return;

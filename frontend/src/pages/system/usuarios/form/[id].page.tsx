@@ -15,14 +15,14 @@ import { User } from "@/interfaces/User";
 import { Role } from "@/interfaces/Role";
 
 import { Layout } from "@/components/system/layout";
-import { Input } from "@/components/input";
-import { Toggle } from "@/components/switch";
-import { Button } from "@/components/button";
-import { PageTitle } from "@/components/page-title";
+import { Input } from "@/components/shared/input";
+import { Toggle } from "@/components/shared/switch";
+import { Button } from "@/components/shared/button";
+import { PageTitle } from "@/components/shared/page-title";
 import { Autocomplete } from "@/components/shared/autocomplete";
 import { getHeaders } from "@/helpers/get-headers";
 import fetchJson from "@/lib/fetch-json";
-import { InputCpfCnpj } from "@/components/input-cpf-cnpj";
+import { InputCpfCnpj } from "@/components/shared/input-cpf-cnpj";
 
 const schema = z
   .object({
