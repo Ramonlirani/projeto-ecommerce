@@ -5,6 +5,7 @@ export class Product {
   shortDescription: string;
   description: string;
   active: boolean;
+  productCategoryId: string;
 
   createdAt?: Date;
   updatedAt?: Date;

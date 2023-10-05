@@ -15,10 +15,11 @@ export class ProductFactoryService
     newProduct.price = createProductDto.price;
     newProduct.shortDescription = createProductDto.shortDescription;
     newProduct.description = createProductDto.description;
+    newProduct.productCategoryId = createProductDto.productCategoryId;
 
     newProduct.active = get(createProductDto, 'active', true);
 
-    return omit(newProduct, 'products');
+    return newProduct;
   }
 
   update(updateProductDto: UpdateProductDto) {
@@ -27,9 +28,10 @@ export class ProductFactoryService
     newProduct.price = updateProductDto.price;
     newProduct.shortDescription = updateProductDto.shortDescription;
     newProduct.description = updateProductDto.description;
+    newProduct.productCategoryId = updateProductDto.productCategoryId;
 
-    newProduct.active = get(updateProductDto, 'active', true);
+    newProduct.active = updateProductDto.active;
 
-    return omit(newProduct, 'products');
+    return newProduct;
   }
 }
