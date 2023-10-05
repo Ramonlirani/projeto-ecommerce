@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import { GetServerSidePropsContext, NextApiRequest } from "next";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { get } from "lodash";
@@ -25,10 +25,18 @@ import fetchJson from "@/lib/fetch-json";
 import { ProductCategory } from "@/interfaces/ProductCategory";
 import { TextArea } from "@/components/shared/textarea";
 import { Product } from "@/interfaces/Product";
+import { Toggle } from "@/components/shared/switch";
 
 const schema = z.object({
   name: z.string().nonempty({ message: "Nome é obrigatório" }),
-  price: z.number(),
+  price: z.preprocess((a: any) => {
+    const value = a.toString();
+    const floatValue = parseFloat(
+      value.replace(/[^\d,-]/g, "").replace(",", ".")
+    );
+
+    return Number(z.coerce.string().parse(floatValue));
+  }, z.coerce.number({ invalid_type_error: "O valor é obrigatório" }).min(0.01, { message: "O valor mínimo é de R$ 0,01" })),
   productCategoryId: z
     .string({ required_error: "Categoria do faq é obrigatório" })
     .nonempty({ message: "Categoria do faq é obrigatório" }),
@@ -47,7 +55,7 @@ interface PageDecryptedProps {
   product: Product;
 }
 
-const url = "product";
+const url = "products";
 
 const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
   const { productCategories, product } = decryptJSON<PageDecryptedProps>(
@@ -91,38 +99,53 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
         setSubcategories(response.subcategories);
       } catch (error) {}
     }
+
     getSubcategories();
   }, [watch("productCategoryId")]);
 
   async function onSubmit(formData: FormData) {
-    const newPrice = get(formData, "price", 0);
+    try {
+      const newPrice = get(formData, "price", 0);
 
-    formData.price = newPrice * 100;
+      formData.price = newPrice * 100;
+      const response = await createOrUpdate({
+        currentEntity: product,
+        formData,
+        entityName: "Produto",
+        url,
+      });
 
-    const response = await createOrUpdate({
-      currentEntity: product,
-      formData,
-      entityName: "Produto",
-      url,
-    });
-    console.log(response);
+      if (get(response, "error", false)) {
+        return;
+      }
 
-    if (get(response, "error", false)) {
-      return;
+      if (!isEditing) reset();
+    } catch (error) {
+      console.log(error);
     }
-
-    if (!isEditing) reset();
   }
 
   return (
     <div className="border-b border-gray-900/10 pb-12 mt-16">
       <PageTitle
         title={`${isEditing ? "Editando" : "Cadastrando"} produto`}
-        backUrl="/system/categoria-faq"
+        backUrl="/system/produto"
       />
       <form onSubmit={handleSubmit(onSubmit)} className="mt-16">
         <div className="space-y-12">
           <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="col-span-full">
+              <Controller
+                control={control}
+                name="active"
+                render={({ field: { ref, ...field } }) => (
+                  <Toggle
+                    {...field}
+                    question="Deseja deixar esse produto ativo?"
+                  />
+                )}
+              />
+            </div>
             <div className="col-span-3 sm:col-span-3 flex items-center justify-between">
               <Input
                 isRequired
@@ -146,19 +169,19 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
               <Autocomplete
                 isRequired
                 control={control}
-                name="productCategoryId"
                 options={productCategories}
                 label="Categoria do Produto"
+                {...register("productCategoryId")}
                 error={errors.name}
               />
             </div>
             <div className="col-span-3 sm:col-span-3 flex items-center justify-between ">
               <AutocompleteMultiple
                 control={control}
-                name="subcategoryId"
                 options={subcategories}
                 isRequired
                 label="Subcategorias"
+                {...register("subcategoryId")} // aqui esta o erro
                 divClasses="w-full"
               />
             </div>
@@ -167,10 +190,18 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 divClasses="w-full"
                 label="Descrição resumida"
                 isRequired
+                {...register("shortDescription")}
+                error={errors.shortDescription}
               />
             </div>
             <div className="col-span-6 sm:col-span-6 flex items-center justify-between ">
-              <TextArea divClasses="w-full" label="Descrição" isRequired />
+              <TextArea
+                divClasses="w-full"
+                label="Descrição"
+                isRequired
+                {...register("description")}
+                error={errors.description}
+              />
             </div>
             <div className="col-span-full flex items-center justify-between">
               <p className="text-red-500 text-sm font-bold">
