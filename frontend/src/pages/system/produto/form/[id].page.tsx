@@ -108,6 +108,9 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       const newPrice = get(formData, "price", 0);
 
       formData.price = newPrice * 100;
+
+      formData.subcategoryId = watch("subcategoryId");
+
       const response = await createOrUpdate({
         currentEntity: product,
         formData,
@@ -121,7 +124,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
 
       if (!isEditing) reset();
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
   }
 
@@ -181,6 +184,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 options={subcategories}
                 isRequired
                 label="Subcategorias"
+                // name="subcategoryId"
                 {...register("subcategoryId")} // aqui esta o erro
                 divClasses="w-full"
               />

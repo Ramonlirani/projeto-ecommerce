@@ -13,7 +13,7 @@ async function CreateOrUpdateRoute(req: NextApiRequest, res: NextApiResponse) {
     const { method, id, url, formData } = JSON.parse(req.body);
     const { headers } = getHeaders(req);
 
-    const response = await fetchJson(`/${url}/${id ? id : ""}`, {
+    const response = await fetchJson(`/${url}${id ? `/${id}` : ""}`, {
       method,
       body: JSON.stringify(formData),
       headers,
@@ -21,6 +21,8 @@ async function CreateOrUpdateRoute(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(200).json(response);
   } catch (error) {
+    console.log(error);
+
     if (error instanceof FetchError) {
       return res
         .status(error.status)
