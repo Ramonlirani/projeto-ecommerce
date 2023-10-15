@@ -54,12 +54,8 @@ export default function AutocompleteMultiple({
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange, ref, value } }) => (
-          <Combobox
-            value={selectedOptions}
-            onChange={setSelectedOptions}
-            multiple
-          >
+        render={({ field }) => (
+          <Combobox {...field} multiple>
             <div className="relative mt-1 ">
               <div
                 className="w-full  

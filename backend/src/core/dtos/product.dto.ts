@@ -1,3 +1,4 @@
+import { Subcategory } from '@core/entities/subcategory.entity';
 import {
   IsString,
   IsNotEmpty,
@@ -32,8 +33,7 @@ export class CreateProductDto {
   productCategoryId: string;
 
   @IsArray()
-  @IsNotEmpty()
-  subcategory: string[];
+  subcategories: Subcategory[];
 }
 
 export class UpdateProductDto extends CreateProductDto {}

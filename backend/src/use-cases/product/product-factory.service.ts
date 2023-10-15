@@ -16,6 +16,7 @@ export class ProductFactoryService
     newProduct.shortDescription = createProductDto.shortDescription;
     newProduct.description = createProductDto.description;
     newProduct.productCategoryId = createProductDto.productCategoryId;
+    newProduct.subcategories = createProductDto.subcategories;
 
     newProduct.active = get(createProductDto, 'active', true);
 
@@ -23,15 +24,16 @@ export class ProductFactoryService
   }
 
   update(updateProductDto: UpdateProductDto) {
-    const newProduct = new Product();
-    newProduct.name = updateProductDto.name;
-    newProduct.price = updateProductDto.price;
-    newProduct.shortDescription = updateProductDto.shortDescription;
-    newProduct.description = updateProductDto.description;
-    newProduct.productCategoryId = updateProductDto.productCategoryId;
+    const updateProduct = new Product();
+    updateProduct.name = updateProductDto.name;
+    updateProduct.price = updateProductDto.price;
+    updateProduct.shortDescription = updateProductDto.shortDescription;
+    updateProduct.description = updateProductDto.description;
+    updateProduct.productCategoryId = updateProductDto.productCategoryId;
+    updateProduct.subcategories = updateProductDto.subcategories;
 
-    newProduct.active = updateProductDto.active;
+    updateProduct.active = updateProductDto.active;
 
-    return newProduct;
+    return updateProduct;
   }
 }

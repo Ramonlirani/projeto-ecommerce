@@ -1,3 +1,5 @@
+import { Subcategory } from './subcategory.entity';
+
 export class Product {
   id: string;
   name: string;
@@ -6,6 +8,7 @@ export class Product {
   description: string;
   active: boolean;
   productCategoryId: string;
+  subcategories: Subcategory[];
 
   createdAt?: Date;
   updatedAt?: Date;

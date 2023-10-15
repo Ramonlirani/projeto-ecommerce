@@ -1,4 +1,3 @@
-import { SubCategory } from "@/interfaces/SubCategory";
 export interface Product {
   id: string;
   name: string;

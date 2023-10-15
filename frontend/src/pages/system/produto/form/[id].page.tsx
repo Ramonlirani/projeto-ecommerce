@@ -27,6 +27,11 @@ import { TextArea } from "@/components/shared/textarea";
 import { Product } from "@/interfaces/Product";
 import { Toggle } from "@/components/shared/switch";
 
+const subCategorySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
 const schema = z.object({
   name: z.string().nonempty({ message: "Nome é obrigatório" }),
   price: z.preprocess((a: any) => {
@@ -43,6 +48,7 @@ const schema = z.object({
   shortDescription: z.string().nonempty({ message: "Mensagem é obrigatória" }),
   description: z.string().nonempty({ message: "Mensagem é obrigatória" }),
   active: z.boolean().default(true),
+  subcategories: z.array(subCategorySchema).default([]),
 });
 type FormData = z.infer<typeof schema>;
 
@@ -76,6 +82,13 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       price: product?.price || 0,
       description: product?.description || "",
       shortDescription: product?.shortDescription || "",
+      subcategories:
+        productCategories?.length > 0
+          ? productCategories[0].subCategories?.map((subcategory) => ({
+              id: subcategory.id,
+              name: subcategory.name,
+            })) || []
+          : [],
     },
   });
 
@@ -109,7 +122,11 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
 
       formData.price = newPrice * 100;
 
-      formData.subcategoryId = watch("subcategoryId");
+      const subcategoryIds = watch("subcategories");
+
+      formData.subcategories = subcategoryIds;
+
+      console.log(formData);
 
       const response = await createOrUpdate({
         currentEntity: product,
@@ -184,8 +201,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 options={subcategories}
                 isRequired
                 label="Subcategorias"
-                // name="subcategoryId"
-                {...register("subcategoryId")} // aqui esta o erro
+                {...register("subcategories")}
                 divClasses="w-full"
               />
             </div>
