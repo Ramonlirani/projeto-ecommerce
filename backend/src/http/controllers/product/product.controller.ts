@@ -23,6 +23,7 @@ export class ProductController {
     @Res() response: Response,
   ) {
     await this.productUseCase.create(createProductDto);
+
     return response.status(201).json({
       error: false,
     });

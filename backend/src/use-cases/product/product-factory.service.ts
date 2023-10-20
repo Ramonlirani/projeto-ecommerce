@@ -16,9 +16,10 @@ export class ProductFactoryService
     newProduct.shortDescription = createProductDto.shortDescription;
     newProduct.description = createProductDto.description;
     newProduct.productCategoryId = createProductDto.productCategoryId;
+    newProduct.active = get(createProductDto, 'active', true);
     newProduct.subcategories = createProductDto.subcategories;
 
-    newProduct.active = get(createProductDto, 'active', true);
+    console.log('newProduct', newProduct);
 
     return newProduct;
   }
@@ -30,9 +31,8 @@ export class ProductFactoryService
     updateProduct.shortDescription = updateProductDto.shortDescription;
     updateProduct.description = updateProductDto.description;
     updateProduct.productCategoryId = updateProductDto.productCategoryId;
-    updateProduct.subcategories = updateProductDto.subcategories;
-
     updateProduct.active = updateProductDto.active;
+    updateProduct.subcategories = updateProductDto.subcategories;
 
     return updateProduct;
   }

@@ -126,8 +126,6 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
 
       formData.subcategories = subcategoryIds;
 
-      console.log(formData);
-
       const response = await createOrUpdate({
         currentEntity: product,
         formData,

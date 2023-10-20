@@ -5,6 +5,7 @@ import {
   IsNumber,
   IsBoolean,
   IsArray,
+  IsOptional,
 } from 'class-validator';
 
 export class CreateProductDto {
@@ -33,7 +34,8 @@ export class CreateProductDto {
   productCategoryId: string;
 
   @IsArray()
-  subcategories: Subcategory[];
+  @IsOptional()
+  subcategories?: Subcategory[];
 }
 
 export class UpdateProductDto extends CreateProductDto {}
