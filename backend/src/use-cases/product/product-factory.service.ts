@@ -19,8 +19,6 @@ export class ProductFactoryService
     newProduct.active = get(createProductDto, 'active', true);
     newProduct.subcategories = createProductDto.subcategories;
 
-    console.log('newProduct', newProduct);
-
     return newProduct;
   }
 

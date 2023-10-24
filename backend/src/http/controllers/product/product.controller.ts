@@ -29,49 +29,49 @@ export class ProductController {
     });
   }
 
-  @Public()
-  @Post('pagination')
-  async pagination(@Body() paginationOptions: PaginationOptionsDto) {
-    return this.productUseCase.pagination(paginationOptions);
-  }
+  // @Public()
+  // @Post('pagination')
+  // async pagination(@Body() paginationOptions: PaginationOptionsDto) {
+  //   return this.productUseCase.pagination(paginationOptions);
+  // }
 
-  @Get('list')
-  async list(@Res() response: Response) {
-    const productCategories = await this.productUseCase.listAll({
-      props: { where: { deletedAt: null } },
-    });
-    return response.status(200).json({
-      error: false,
-      productCategories,
-    });
-  }
+  // @Get('list')
+  // async list(@Res() response: Response) {
+  //   const productCategories = await this.productUseCase.listAll({
+  //     props: { where: { deletedAt: null } },
+  //   });
+  //   return response.status(200).json({
+  //     error: false,
+  //     productCategories,
+  //   });
+  // }
 
-  @Get(':id')
-  async getById(@Res() response: Response, @Param('id') id: string) {
-    const Product = await this.productUseCase.getById(id);
-    return response.status(200).json({
-      error: false,
-      Product,
-    });
-  }
+  // @Get(':id')
+  // async getById(@Res() response: Response, @Param('id') id: string) {
+  //   const Product = await this.productUseCase.getById(id);
+  //   return response.status(200).json({
+  //     error: false,
+  //     Product,
+  //   });
+  // }
 
-  @Put(':id')
-  async update(
-    @Body() updateProductDto: UpdateProductDto,
-    @Res() response: Response,
-    @Param('id') id: string,
-  ) {
-    await this.productUseCase.update(id, updateProductDto);
-    return response.status(200).json({
-      error: false,
-    });
-  }
+  // @Put(':id')
+  // async update(
+  //   @Body() updateProductDto: UpdateProductDto,
+  //   @Res() response: Response,
+  //   @Param('id') id: string,
+  // ) {
+  //   await this.productUseCase.update(id, updateProductDto);
+  //   return response.status(200).json({
+  //     error: false,
+  //   });
+  // }
 
-  @Delete(':id')
-  async delete(@Res() response: Response, @Param('id') id: string) {
-    await this.productUseCase.deleteWithTimestamp(id);
-    return response.status(200).json({
-      error: false,
-    });
-  }
+  // @Delete(':id')
+  // async delete(@Res() response: Response, @Param('id') id: string) {
+  //   await this.productUseCase.deleteWithTimestamp(id);
+  //   return response.status(200).json({
+  //     error: false,
+  //   });
+  // }
 }

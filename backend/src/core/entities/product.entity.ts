@@ -8,7 +8,7 @@ export class Product {
   description: string;
   active: boolean;
   productCategoryId: string;
-  subcategories: Subcategory[];
+  subcategories?: Subcategory[];
 
   createdAt?: Date;
   updatedAt?: Date;

@@ -24,7 +24,7 @@ const Page: NextPageWithLayout = () => {
     queryFn: () => fetchPagination(page),
     keepPreviousData: true,
   });
-  const hasItems = data?.data.length as number;
+  const hasItems = data?.data?.length as number;
 
   async function fetchPagination(
     page: number
