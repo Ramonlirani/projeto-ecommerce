@@ -4,7 +4,7 @@ export interface ProductCategory {
   id: string;
   name: string;
 
-  subCategories: SubCategory[];
+  subcategories: SubCategory[];
   createdAt: string;
   updatedAt: string;
 }

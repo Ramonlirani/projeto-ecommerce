@@ -6,8 +6,9 @@ import { Tooltip } from "react-tooltip";
 const modelNameDictionary: any = {
   service: "Serviços",
   user: "Usuário",
-  saleAlbum: "Álbum para venda",
-  album: "Álbuns",
+  product: "produtos novos",
+  productCategory: "Categoria do produto",
+  subcategories: "subcategorias do produto",
   permission: "Nível de acesso",
   faq: "Faqs",
   faqCategory: "Categorias do Faq",

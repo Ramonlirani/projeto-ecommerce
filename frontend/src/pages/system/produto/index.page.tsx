@@ -11,8 +11,11 @@ import { NotFoundOrEmpty } from "@/components/not-found";
 import { Loading } from "@/components/shared/loading";
 import { DeleteButton } from "@/components/shared/table/actions/delete-button";
 import { EditButton } from "@/components/shared/table/actions/edit-button";
-import { FaqCategory } from "@/interfaces/FaqCategory";
 import { CreateButton } from "@/components/shared/table/actions/create-button";
+import { Product } from "@/interfaces/Product";
+import { formatNumber } from "@/helpers/format-number";
+import { ProductCategory } from "@/interfaces/ProductCategory";
+import { SubCategory } from "@/interfaces/SubCategory";
 
 const url = "products";
 
@@ -25,10 +28,11 @@ const Page: NextPageWithLayout = () => {
     keepPreviousData: true,
   });
   const hasItems = data?.data?.length as number;
+  console.log(data?.data);
 
   async function fetchPagination(
     page: number
-  ): Promise<PaginationResponse<FaqCategory>> {
+  ): Promise<PaginationResponse<Product>> {
     const body = JSON.stringify({
       body: { page, where: { deletedAt: null } },
       url,
@@ -76,7 +80,7 @@ const Page: NextPageWithLayout = () => {
                             scope="col"
                             className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                           >
-                            Nome
+                            Nome do produto
                           </th>
                           <th
                             scope="col"
@@ -92,6 +96,18 @@ const Page: NextPageWithLayout = () => {
                           </th>
                           <th
                             scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                          >
+                            Preço
+                          </th>
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                          >
+                            Descrição
+                          </th>
+                          <th
+                            scope="col"
                             className="relative py-3.5 pl-3 pr-4 sm:pr-0"
                           >
                             <span className="sr-only"></span>
@@ -99,30 +115,44 @@ const Page: NextPageWithLayout = () => {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {data!.data.map((faqCategory, index: number) => (
-                          <tr key={faqCategory.id}>
+                        {data!.data.map((product, index: number) => (
+                          <tr key={product.id}>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-400 sm:pl-0">
                               {index + 1}
                             </td>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                              {faqCategory.name}
+                              {product.name}
                             </td>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                              bla
+                              {product.category?.name}
                             </td>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                              bua
+                              {(product.category?.subcategories ?? []).length >
+                              1
+                                ? `${
+                                    product.category?.subcategories[0]?.name
+                                  }... +${
+                                    (product.category?.subcategories.length ??
+                                      0) - 1
+                                  }`
+                                : product.category?.subcategories?.[0]?.name}
+                            </td>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
+                              {formatNumber({ number: product.price })}
+                            </td>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
+                              {product.description}
                             </td>
                             <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 overflow-visible">
                               <EditButton
                                 url="categoria-faq"
-                                id={faqCategory.id}
+                                id={product.id}
                                 modelName="product"
                               />
 
                               <DeleteButton
                                 modelName="product"
-                                id={faqCategory.id}
+                                id={product.id}
                                 url={url}
                                 refetch={refetch}
                               />
@@ -152,9 +182,3 @@ Page.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default Page;
-
-export const getServerSideProps = requireAuthentication(() => {
-  return {
-    props: {},
-  };
-});

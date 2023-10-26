@@ -2,19 +2,6 @@ import { FaqCategory } from "@/interfaces/FaqCategory";
 import { Disclosure } from "@headlessui/react";
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 
-const faqs = [
-  {
-    question: "Como funciona para fazer o orçamento?",
-    answer:
-      "Você escolhe o produto desejado, entra em contato conosco através do nosso Whatsapp ou Email e fazemos o orçamento para você.",
-  },
-  {
-    question: "Como funciona o frete?",
-    answer:
-      "Depois de terminarmos o produto, pesamos e enviamos para o endereço que conversamos através das mensagens.",
-  },
-];
-
 interface FaqsProps {
   faqCategories: FaqCategory[];
 }
