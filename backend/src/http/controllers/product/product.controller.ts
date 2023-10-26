@@ -29,17 +29,15 @@ export class ProductController {
     });
   }
 
-  // @Public()
-  // @Post('pagination')
-  // async pagination(@Body() paginationOptions: PaginationOptionsDto) {
-  //   return this.productUseCase.pagination(paginationOptions);
-  // }
+  @Public()
+  @Post('pagination')
+  async pagination(@Body() paginationOptions: PaginationOptionsDto) {
+    return this.productUseCase.pagination(paginationOptions);
+  }
 
-  // @Get('list')
+  // @Get('listAll')
   // async list(@Res() response: Response) {
-  //   const productCategories = await this.productUseCase.listAll({
-  //     props: { where: { deletedAt: null } },
-  //   });
+  //   const productCategories = await this.productUseCase.listAll();
   //   return response.status(200).json({
   //     error: false,
   //     productCategories,
@@ -67,11 +65,11 @@ export class ProductController {
   //   });
   // }
 
-  // @Delete(':id')
-  // async delete(@Res() response: Response, @Param('id') id: string) {
-  //   await this.productUseCase.deleteWithTimestamp(id);
-  //   return response.status(200).json({
-  //     error: false,
-  //   });
-  // }
+  @Delete(':id')
+  async delete(@Res() response: Response, @Param('id') id: string) {
+    await this.productUseCase.deleteWithTimestamp(id);
+    return response.status(200).json({
+      error: false,
+    });
+  }
 }
