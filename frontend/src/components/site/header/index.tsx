@@ -1,81 +1,91 @@
 import {
   MagnifyingGlassIcon,
-  UserIcon,
   ShoppingBagIcon,
-  PhoneIcon,
-} from "@heroicons/react/24/solid";
-import lotusFlower from "@/assets/images/LotusFlower.svg";
+} from "@heroicons/react/24/outline";
+import dreamfit from "@/assets/logo/dreamfit.png";
 
 import Image from "next/image";
-import Link from "next/link";
-import { ModalSearch } from "@/components/shared/modal-search";
-import { useShowModal } from "@/hooks/zustand/show-modal";
-import InputSearchModal from "@/components/shared/modal-search/body/input-search-modal";
+
 import { MenuUser } from "@/components/shared/menu-user";
+import { FlyoutMenu } from "@/components/shared/flyout-menu";
 
 export function Header() {
-  const { showModal, setShowModal, setBody } = useShowModal();
-
-  function handleInput() {
-    setBody(<InputSearchModal />);
-    setShowModal(true);
-  }
-
   return (
     <>
-      <ModalSearch open={showModal} setOpen={setShowModal} />
-      <header className="grid items-center w-full z-50 bg-tomilho-500 h-40">
-        <nav className="flex items-center justify-between px-10 lg:px-14">
+      <header className="grid items-center w-full z-50 bg-#f6e8ea h-34 px-10 lg:px-14 pt-8 ">
+        <div className="bg-#f6e8ea hidden md:hidden md:justify-end  md:items-center lg:flex lg:justify-end  lg:items-center text-sm text-black space-x-3 ">
+          <a href="/contato" className="hover:text-dim-gray">
+            <p>Contate-nos</p>
+          </a>
+          <p className="text-black">|</p>
+          <MenuUser />
+        </div>
+        <nav className="md:block md:items-center md:justify-between lg:flex lg:items-center lg:justify-between ">
           <div className="flex lg:flex-1">
-            <a href="/">
+            <a href="/" className="flex items-center  mr-auto lg:mx-0">
               <span className="sr-only">Your Company</span>
-              <Image
-                src={lotusFlower}
-                className="w-20 md:w-36 lg:w-36"
-                alt=""
-              />
+              <Image src={dreamfit} className="w-36" alt="logo" />
             </a>
-          </div>
-          <div className="hidden lg:flex lg:gap-x-12 text-white text-3xl">
-            <p>
-              <span>Vó Joana Convites</span> <br /> PAPELARIA FINA
-            </p>
-          </div>
-          <div className="flex flex-1 text-white mx-auto justify-end space-x-2">
-            <Link href="/contato">
-              <p className="hidden md:block lg:block hover:opacity-75">
-                Contato
-              </p>
-              <PhoneIcon className="w-6 h-6 md:hidden lg:hidden block" />
-            </Link>
-            <div className="cursor-pointer" onClick={handleInput}>
-              <span className="sr-only">Search</span>
-              <MagnifyingGlassIcon
-                className="hidden h-6 w-6 hover:opacity-75 md:block lg:block"
-                aria-hidden="true"
-              />
-            </div>
-            <div>
-              <MenuUser />
-            </div>
-            <a href="/carrinho" className="group -m-2 flex items-center">
+            <a
+              href="/carrinho"
+              className="group -m-2 flex items-center lg:hidden"
+            >
               <ShoppingBagIcon
-                className="h-6 w-6 flex-shrink-0 group-hover:text-gray-200"
+                className="h-6 w-6 flex-shrink-0 text-black group-hover:text-dim-gray"
                 aria-hidden="true"
               />
-              <span className="ml-2 text-sm font-medium group-hover:text-gray-200">
+              <span className="ml-2 mr-3 text-sm font-medium text-black group-hover:text-dim-gray">
+                0
+              </span>
+              <span className="sr-only">items in cart, view bag</span>
+            </a>
+            <div className="sm:block md:block lg:hidden">
+              <FlyoutMenu />
+            </div>
+          </div>
+          <div className="flex text-white  lg:mx-auto lg:justify-end lg:space-x-5">
+            <div className="min-w-0 w-full md:px-0 lg:px-0 xl:col-span-6">
+              <div className="flex items-center py-4 ">
+                <div className="w-full">
+                  <label htmlFor="search" className="sr-only">
+                    Buscar
+                  </label>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                      <MagnifyingGlassIcon
+                        className="h-5 w-5 text-black"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <input
+                      id="search"
+                      name="search"
+                      className="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-off-red sm:text-sm sm:leading-6 hover:bg-gray-200"
+                      placeholder="Buscar"
+                      type="search"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a
+              href="/carrinho"
+              className="group -m-2 hidden lg:flex lg:items-center"
+            >
+              <ShoppingBagIcon
+                className="h-6 w-6 flex-shrink-0 text-black group-hover:text-dim-gray"
+                aria-hidden="true"
+              />
+              <span className="ml-2 text-sm font-medium text-black  group-hover:text-dim-gray">
                 0
               </span>
               <span className="sr-only">items in cart, view bag</span>
             </a>
           </div>
         </nav>
-        <div className="flex w-full items-center px-6 md:hidden lg:hidden">
-          <input
-            className="w-full bg-transparent border-b border-white p-2 border-t-0 border-x-0 text-white placeholder:text-white focus:ring-0 focus:border-b-white"
-            placeholder="O que você está procurando?"
-          />
-          <MagnifyingGlassIcon className="w-6 h-6 text-white absolute right-14" />
+
+        <div className="hidden md:hidden lg:block ">
+          <FlyoutMenu />
         </div>
       </header>
     </>

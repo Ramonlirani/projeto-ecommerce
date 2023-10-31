@@ -9,6 +9,7 @@ export interface Product {
   description: string;
   active: boolean;
   productCategoryId: string;
+  imageUrl: string;
 
   category?: ProductCategory;
   subcategories?: SubCategory[];

@@ -22,17 +22,12 @@ function classNames(...classes: string[]) {
 
 export function MenuUser() {
   return (
-    <div className="flex flex-1 self-stretch">
-      <div className="relative flex flex-1" />
-
+    <div className="">
       <div className="flex items-center gap-x-4">
         <Menu as="div" className="relative">
           <Menu.Button className="-m-1.5 flex items-center p-1.5">
-            <span className="flex items-center">
-              <UserIcon
-                className="h-6 w-6 hover:opacity-75 md:block lg:block"
-                aria-hidden="true"
-              />
+            <span className="flex items-center hover:text-dim-gray">
+              <p>Entrar</p>
             </span>
           </Menu.Button>
           <Transition

@@ -8,8 +8,8 @@ import money from "@/assets/icons/money.svg";
 export function DeliveryDetails() {
   return (
     <>
-      <div className="w-full md:h-36 text-center bg-background-main text-capim-seco ">
-        <div className="flex flex-wrap gap-6 p-4 mx-auto max-w-2xl lg:max-w-7xl lg:px-8 justify-between h-full items-center text-center">
+      <div className="w-full md:h-36 text-center bg-background-main text-black ">
+        <div className="flex flex-wrap md:gap-6 lg:gap-6 p-4 mx-auto max-w-2xl lg:max-w-7xl lg:px-8 justify-between h-full items-center text-center">
           <div className="md:flex">
             <Image
               src={creditCard}
@@ -50,7 +50,7 @@ export function DeliveryDetails() {
               width={50}
               className="mx-auto md:mr-3 lg:mr-3"
             />
-            <p>
+            <p className="w-44">
               Orçamento feito através <br /> dos nossos contatos
             </p>
           </div>

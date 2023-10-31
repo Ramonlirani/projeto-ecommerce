@@ -14,22 +14,13 @@ import {
   PhoneIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import lotusFlowerMenu from "@/assets/images/LotusFlowerTomilhoColor.svg";
-
-import godparents from "@/assets/icons/padrinhos.png";
-import invitation from "@/assets/icons/invitation.svg";
-import paper from "@/assets/icons/paper.png";
-import toilet from "@/assets/icons/toilet.png";
-import diary from "@/assets/icons/diary.png";
-import { Input } from "../input";
-import Link from "next/link";
+import dreamfit from "@/assets/logo/dreamfit.png";
 
 const navigation = {
   categories: [
     {
       id: "invitations",
-      name: "Convites",
-      icon: invitation,
+      name: "LANÇAMENTOS",
       featured: [
         {
           name: "New Arrivals",
@@ -76,8 +67,7 @@ const navigation = {
     },
     {
       id: "godparents",
-      name: "Padrinhos",
-      icon: godparents,
+      name: "CALÇAS",
       featured: [
         {
           name: "New Arrivals",
@@ -136,8 +126,7 @@ const navigation = {
     },
     {
       id: "fineStationery",
-      name: "Papelaria Fina",
-      icon: paper,
+      name: "BLUSAS",
       featured: [
         {
           name: "New Arrivals",
@@ -184,8 +173,7 @@ const navigation = {
     },
     {
       id: "toilet",
-      name: "Toilet",
-      icon: toilet,
+      name: "TOPS E SHORTS",
       featured: [
         {
           name: "New Arrivals",
@@ -232,8 +220,7 @@ const navigation = {
     },
     {
       id: "schedule",
-      name: "Agendas",
-      icon: diary,
+      name: "ACESSÓRIOS",
       featured: [
         {
           name: "New Arrivals",
@@ -375,11 +362,7 @@ export function FlyoutMenu() {
                       className="-m-1.5 p-1.5 text-center justify-center"
                     >
                       <span className="sr-only">Your Company</span>
-                      <Image
-                        src={lotusFlowerMenu}
-                        className="w-12 h-12"
-                        alt=""
-                      />
+                      <Image src={dreamfit} className="w-40 h-12" alt="" />
                     </a>
                   </div>
 
@@ -392,22 +375,13 @@ export function FlyoutMenu() {
                             className={({ selected }) =>
                               classNames(
                                 selected
-                                  ? "border-none text-gray-600"
-                                  : "border-none text-gray-600",
+                                  ? "border-none text-black"
+                                  : "border-none text-black",
                                 "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base"
                               )
                             }
                           >
                             <span className="flex items-center space-x-2">
-                              {category.icon && (
-                                <Image
-                                  alt={category.name}
-                                  src={category.icon}
-                                  width={1200}
-                                  height={1200}
-                                  className="w-6 h-6 text-salgueiro"
-                                />
-                              )}
                               {category.name}
                             </span>
                           </Tab>
@@ -504,18 +478,17 @@ export function FlyoutMenu() {
           </Dialog>
         </Transition.Root>
 
-        <header className="relative flex bg-white">
-          <nav aria-label="Top" className="mx-auto  space-x-5">
-            <div className="flex h-16 items-center">
+        <header className="relative flex bg-white ">
+          <nav aria-label="Top" className="mx-auto ">
+            <div className="flex h-16 items-center ">
               <button
                 type="button"
-                className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                className="relative rounded-md bg-white ml-2 text-gray-400 lg:hidden"
                 onClick={() => setMobileMenuOpen(true)}
               >
-                <span className="absolute -inset-0.5" />
+                <span className="" />
                 <span className="flex">
-                  <Bars3Icon className="w-6 h-6 mr-2" />
-                  Abrir Menu
+                  <Bars3Icon className="w-6 h-6  text-black" />
                 </span>
               </button>
 
@@ -526,28 +499,17 @@ export function FlyoutMenu() {
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
                         <>
-                          <div className="relative flex px-4">
+                          <div className="relative flex px-10">
                             <Popover.Button
                               className={classNames(
                                 open
-                                  ? "border-salgueiro text-salgueiro"
-                                  : "border-none text-capim-seco",
+                                  ? "border-off-red text-black"
+                                  : "border-none text-black",
                                 "relative z-10 -mb-px flex items-center border-b-2 transition-colors duration-200 ease-out hover:opacity-75 focus:outline-none"
                               )}
                             >
-                              <span className="flex items-center">
-                                {category.icon && (
-                                  <Image
-                                    src={category.icon}
-                                    alt={category.name}
-                                    width={25}
-                                    height={25}
-                                    className="mr-3"
-                                  />
-                                )}
-                                <p className="text-tomilho-800">
-                                  {category.name}
-                                </p>
+                              <span className="flex items-center ">
+                                <p className="text-black">{category.name}</p>
                               </span>
                             </Popover.Button>
                           </div>

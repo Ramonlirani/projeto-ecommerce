@@ -44,18 +44,18 @@ export function CardProduct({ product }: CardProductProps) {
         }}
       ></div>
       <div className="flex flex-1 flex-col space-y-2 p-4">
-        <h3 className="text-sm font-semibold text-tomilho-500">
-          {product.name}
+        <h3 className="text-sm font-semibold text-cardinal">
+          {product.name.toUpperCase()}
         </h3>
         <p className="text-sm text-gray-400">{truncatedDescription}</p>{" "}
         <div className="flex flex-1 flex-col justify-end">
           <p className="text-gray-500">{product.price}</p>
           <span className="flex justify-between mt-5">
             <a href="/detalhes">
-              <p className="text-tomilho-500 hover:opacity-75">Ver detalhes</p>
+              <p className="text-cardinal hover:opacity-75">Ver detalhes</p>
             </a>
             <button
-              className="bg-tomilho-500 hover:opacity-75 text-white rounded-full p-2 flex items-center justify-center"
+              className="bg-cardinal hover:opacity-75 text-white rounded-full p-2 flex items-center justify-center"
               data-tooltip-id={`plus-icon-${product.id}`}
               data-tooltip-content="Adicionar a sacola"
             >

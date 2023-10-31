@@ -26,6 +26,7 @@ import { ProductCategory } from "@/interfaces/ProductCategory";
 import { TextArea } from "@/components/shared/textarea";
 import { Product } from "@/interfaces/Product";
 import { Toggle } from "@/components/shared/switch";
+import { InputFileImage } from "@/components/shared/input-file-image";
 
 const subCategorySchema = z.object({
   id: z.string(),
@@ -49,6 +50,12 @@ const schema = z.object({
   description: z.string().nonempty({ message: "Mensagem é obrigatória" }),
   active: z.boolean().default(true),
   subcategories: z.array(subCategorySchema).default([]),
+  imageUrl: z
+    .string({
+      invalid_type_error: "Forneça uma imagem válida",
+      required_error: "Foto do produto é obrigatório",
+    })
+    .nonempty({ message: "Foto do produto é obrigatório" }),
 });
 type FormData = z.infer<typeof schema>;
 
@@ -82,9 +89,10 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       price: product?.price || 0,
       description: product?.description || "",
       shortDescription: product?.shortDescription || "",
+      imageUrl: product.imageUrl || "",
       subcategories:
         productCategories?.length > 0
-          ? productCategories[0].subCategories?.map((subcategory) => ({
+          ? productCategories[0].subcategories?.map((subcategory) => ({
               id: subcategory.id,
               name: subcategory.name,
             })) || []
@@ -96,6 +104,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
     control,
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
     reset,
     watch,
@@ -162,6 +171,12 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                     question="Deseja deixar esse produto ativo?"
                   />
                 )}
+              />
+              <InputFileImage
+                isRequired
+                formName="imageUrl"
+                setValue={setValue}
+                error={errors.imageUrl}
               />
             </div>
             <div className="col-span-3 sm:col-span-3 flex items-center justify-between">

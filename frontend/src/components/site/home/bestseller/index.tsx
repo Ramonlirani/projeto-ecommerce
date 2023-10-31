@@ -89,7 +89,7 @@ export function Bestseller() {
     <>
       <main className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
         <div className="border-b border-gray-200 pt-14">
-          <p className="text-capim-seco font-semibold">MAIS VENDIDOS</p>
+          <p className="text-black font-semibold">MAIS VENDIDOS</p>
         </div>
 
         <div className="pb-24 pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">

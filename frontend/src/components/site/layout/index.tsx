@@ -6,8 +6,8 @@ import { Footer } from "../footer";
 import { ButtonWhatsApp } from "@/components/shared/button-whatsapp";
 import { FlyoutMenu } from "@/components/shared/flyout-menu";
 
-const centuryGothic = localFont({
-  src: "../../../assets/fonts/CenturyGothic.ttf",
+const robotoCondensed = localFont({
+  src: "../../../assets/fonts/RobotoCondensed-VariableFont_wght.ttf",
 });
 
 interface LayoutProps {
@@ -16,11 +16,11 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className={`bg-white ${centuryGothic.className}`}>
+    <div className={`bg-white ${robotoCondensed.className}`}>
       <Header />
 
       <ButtonWhatsApp whatsApp="41998545699" />
-      <FlyoutMenu />
+      {/* <FlyoutMenu /> */}
 
       <main>{children}</main>
 
