@@ -16,6 +16,7 @@ export class ProductFactoryService
     newProduct.shortDescription = createProductDto.shortDescription;
     newProduct.description = createProductDto.description;
     newProduct.productCategoryId = createProductDto.productCategoryId;
+    newProduct.imageUrl = createProductDto.imageUrl;
     newProduct.active = get(createProductDto, 'active', true);
     newProduct.subcategories = createProductDto.subcategories;
 
@@ -30,6 +31,7 @@ export class ProductFactoryService
     updateProduct.description = updateProductDto.description;
     updateProduct.productCategoryId = updateProductDto.productCategoryId;
     updateProduct.active = updateProductDto.active;
+    updateProduct.imageUrl = updateProduct.imageUrl;
     updateProduct.subcategories = updateProductDto.subcategories;
 
     return updateProduct;

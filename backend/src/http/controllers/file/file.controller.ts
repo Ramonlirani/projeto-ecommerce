@@ -1,30 +1,26 @@
-import {
-  Controller,
-  Post,
-  Res,
-  UploadedFile,
-  UseInterceptors,
-} from '@nestjs/common';
 import { Public } from '@auth-decorators/public.decorator';
+import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { FileUseCases } from '@use-cases/file/file.use-case';
-import { Response } from 'express';
-
-@Controller('files')
+import { diskStorage } from 'multer';
+@Controller()
 export class FileController {
-  constructor(private fileUseCase: FileUseCases) {}
   @Public()
-  @Post('/upload')
-  @UseInterceptors(FileInterceptor('upload'))
-  async uploadFile(
-    @UploadedFile() upload: Express.Multer.File,
-    @Res() response: Response,
-  ) {
-    const url = await this.fileUseCase.uploadToS3(upload);
-
-    return response.status(200).json({
-      error: false,
-      url,
-    });
+  @Post('upload')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: 'public/img',
+        filename: (req, file, cb) => {
+          cb(null, `${file.originalname}`);
+        },
+      }),
+    }),
+  )
+  async local(@UploadedFile() file: Express.Multer.File) {
+    console.log('sucess');
+    return {
+      statusCode: 200,
+      data: file.path,
+    };
   }
 }

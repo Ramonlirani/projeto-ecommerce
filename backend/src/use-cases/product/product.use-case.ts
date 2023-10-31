@@ -27,6 +27,7 @@ export class ProductUseCases {
           shortDescription: newProduct.shortDescription,
           description: newProduct.description,
           productCategoryId: newProduct.productCategoryId,
+          imageUrl: newProduct.imageUrl,
           active: newProduct.active,
         },
       });

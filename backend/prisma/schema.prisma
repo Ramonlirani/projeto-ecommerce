@@ -121,6 +121,7 @@ model Product {
   description      String
   shortDescription String  @map("short_description")
   active           Boolean @default(true)
+  imageUrl         String  @map("image_url")
 
   createdAt DateTime  @default(now()) @map("created_at")
   updateAt  DateTime? @updatedAt @map("updated_at")

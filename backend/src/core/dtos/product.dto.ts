@@ -33,6 +33,10 @@ export class CreateProductDto {
   @IsNotEmpty()
   productCategoryId: string;
 
+  @IsString()
+  @IsNotEmpty()
+  imageUrl: string;
+
   @IsArray()
   @IsOptional()
   subcategories?: Subcategory[];
