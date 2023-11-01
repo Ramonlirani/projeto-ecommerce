@@ -368,7 +368,7 @@ export function FlyoutMenu() {
 
                   <Tab.Group as="div" className="mt-2">
                     <div className="border-b border-gray-200 px-6">
-                      <Tab.List className="flex space-x-8 overflow-auto">
+                      <Tab.List className="flex space-x-6 overflow-auto">
                         {navigation.categories.map((category) => (
                           <Tab
                             key={category.name}
@@ -377,7 +377,7 @@ export function FlyoutMenu() {
                                 selected
                                   ? "border-none text-black"
                                   : "border-none text-black",
-                                "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base"
+                                "flex-1 whitespace-nowrap border-b-2 py-4 text-base"
                               )
                             }
                           >
@@ -480,7 +480,7 @@ export function FlyoutMenu() {
 
         <header className="relative flex bg-white ">
           <nav aria-label="Top" className="mx-auto ">
-            <div className="flex h-16 items-center ">
+            <div className="flex h-16 items-center text-lg">
               <button
                 type="button"
                 className="relative rounded-md bg-white ml-2 text-gray-400 lg:hidden"
@@ -499,7 +499,7 @@ export function FlyoutMenu() {
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
                         <>
-                          <div className="relative flex px-10">
+                          <div className="relative flex px-4 items-center">
                             <Popover.Button
                               className={classNames(
                                 open

@@ -15,8 +15,10 @@ const products = [
     description:
       "Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.",
     options: "8 colors",
-    imageSrc: "./invitations/convite1.jpg",
-    secondaryImage: "./invitations/convite4.jpg",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+    secondaryImage:
+      "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
     imageAlt:
       "Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.",
   },
@@ -28,8 +30,10 @@ const products = [
     description:
       "Look like a visionary CEO and wear the same black t-shirt every day.",
     options: "Black",
-    imageSrc: "./invitations/convite2.jpg",
-    secondaryImage: "./invitations/convite4.jpg",
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg",
+    secondaryImage:
+      "https://tailwindui.com/img/ecommerce-images/mega-menu-category-04.jpg",
     imageAlt: "Front of plain black t-shirt.",
   },
   {
@@ -87,9 +91,9 @@ const products = [
 export function Bestseller() {
   return (
     <>
-      <main className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
-        <div className="border-b border-gray-200 pt-14">
-          <p className="text-black font-semibold">MAIS VENDIDOS</p>
+      <main className="mx-auto max-w-2xl px-4 lg:max-w-full lg:px-28">
+        <div className="border-b border-gray-200">
+          <p className="text-black font-semibold text-xl">MAIS VENDIDOS</p>
         </div>
 
         <div className="pb-24 pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">

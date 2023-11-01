@@ -1,4 +1,3 @@
-import { PlusIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
 
@@ -31,40 +30,31 @@ export function CardProduct({ product }: CardProductProps) {
   return (
     <div
       key={product.id}
-      className="group relative flex flex-col overflow-hidden rounded-lg shadow-xl bg-white"
+      className="group relative flex flex-col overflow-hidden rounded-sm bg-white border border-gray-300 pt-3 pr-3 pl-3 pb-0"
+      id="div-main"
     >
-      <div
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className="bg-top bg-cover bg-no-repeat h-56 transition-all duration-400"
-        style={{
-          backgroundImage: `url(${
-            isHovering ? product.secondaryImage : product.imageSrc
-          })`,
-        }}
-      ></div>
-      <div className="flex flex-1 flex-col space-y-2 p-4">
-        <h3 className="text-sm font-semibold text-cardinal">
-          {product.name.toUpperCase()}
-        </h3>
-        <p className="text-sm text-gray-400">{truncatedDescription}</p>{" "}
-        <div className="flex flex-1 flex-col justify-end">
-          <p className="text-gray-500">{product.price}</p>
-          <span className="flex justify-between mt-5">
-            <a href="/detalhes">
-              <p className="text-cardinal hover:opacity-75">Ver detalhes</p>
-            </a>
-            <button
-              className="bg-cardinal hover:opacity-75 text-white rounded-full p-2 flex items-center justify-center"
-              data-tooltip-id={`plus-icon-${product.id}`}
-              data-tooltip-content="Adicionar a sacola"
-            >
-              <PlusIcon width={15} height={15} />
-            </button>
-          </span>
-          <Tooltip id={`plus-icon-${product.id}`} />
+      <a href="/detalhes">
+        <div
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="bg-top bg-cover bg-no-repeat h-96 transition-all duration-600"
+          style={{
+            backgroundImage: `url(${
+              isHovering ? product.secondaryImage : product.imageSrc
+            })`,
+          }}
+        ></div>
+
+        <div className="flex flex-1 flex-col space-y-2 p-4">
+          <h3 className="text-lg  text-black">{product.name.toUpperCase()}</h3>
+          {/* <p className="text-md text-gray-400">{truncatedDescription}</p>{" "} */}
+          <div className="flex flex-1 flex-col justify-end ">
+            <p className=" text-lg text-off-red">{product.price}</p>
+
+            <Tooltip id={`plus-icon-${product.id}`} />
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   );
 }

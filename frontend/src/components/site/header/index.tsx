@@ -20,12 +20,18 @@ export function Header() {
           <p className="text-black">|</p>
           <MenuUser />
         </div>
-        <nav className="md:block md:items-center md:justify-between lg:flex lg:items-center lg:justify-between ">
-          <div className="flex lg:flex-1">
-            <a href="/" className="flex items-center  mr-auto lg:mx-0">
+        <nav className="md:block md:items-center md:justify-between lg:flex lg:items-center lg:justify-between">
+          <div className="flex lg:flex-1 items-center">
+            <a
+              href="/"
+              className="flex items-center justify-start  mr-auto lg:mx-0"
+            >
               <span className="sr-only">Your Company</span>
               <Image src={dreamfit} className="w-36" alt="logo" />
             </a>
+            <div className="hidden md:hidden lg:block lg:flex-1">
+              <FlyoutMenu />
+            </div>
             <a
               href="/carrinho"
               className="group -m-2 flex items-center lg:hidden"
@@ -39,7 +45,7 @@ export function Header() {
               </span>
               <span className="sr-only">items in cart, view bag</span>
             </a>
-            <div className="sm:block md:block lg:hidden">
+            <div className="sm:block md:block lg:hidden justify-center items-center">
               <FlyoutMenu />
             </div>
           </div>
@@ -83,10 +89,6 @@ export function Header() {
             </a>
           </div>
         </nav>
-
-        <div className="hidden md:hidden lg:block ">
-          <FlyoutMenu />
-        </div>
       </header>
     </>
   );
