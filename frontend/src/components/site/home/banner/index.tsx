@@ -13,7 +13,7 @@ export function Banner() {
           height={1200}
           src={banner1}
           alt="banner1"
-          className="object-top object-cover w-full h-[300px] sm:h-[650px]"
+          className="object-top object-cover w-full h-[300px] sm:h-[750px]"
         />
       </div>
       <div>
@@ -22,7 +22,7 @@ export function Banner() {
           height={1200}
           src={banner2}
           alt="banner2"
-          className="object-top object-cover w-full h-[300px] sm:h-[650px]"
+          className="object-top object-cover w-full h-[300px] sm:h-[750px]"
         />
       </div>
       <div>
@@ -31,7 +31,7 @@ export function Banner() {
           height={1200}
           src={banner3}
           alt="banner2"
-          className="object-top object-cover w-full h-[300px] sm:h-[650px]"
+          className="object-top object-cover w-full h-[300px] sm:h-[750px]"
         />
       </div>
     </Carousel>

@@ -25,12 +25,12 @@ export default function InputIncrement() {
     <>
       <div className="flex gap-2">
         <button
-          className="w-10 bg-tomilho-500 rounded-md flex items-center justify-center text-white"
+          className="w-10 bg-black hover:opacity-75 rounded-md flex items-center justify-center text-white"
           type="button"
           onClick={handleDecrement}
           disabled={value === 0}
         >
-          <MinusIcon className="w-4 h-4" />
+          <MinusIcon className="w-5 h-5 text-white" />
         </button>
         <input
           type="number"
@@ -39,11 +39,11 @@ export default function InputIncrement() {
           onChange={handleInputChange}
         />
         <button
-          className="w-10 bg-tomilho-500 rounded-md flex items-center justify-center text-white"
+          className="w-10 bg-black hover:opacity-75 rounded-md flex items-center justify-center text-white"
           type="button"
           onClick={handleIncrement}
         >
-          <PlusIcon className="w-4 h-4" />
+          <PlusIcon className="w-5 h-5 text-white" />
         </button>
       </div>
     </>

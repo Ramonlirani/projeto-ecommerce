@@ -1,8 +1,8 @@
 import { Layout } from "@/components/site/layout";
 import { NextPageWithLayout } from "@/interfaces/NextPageWithLayout";
-import convite1 from "@/assets/images/convite1.jpg";
-import convite2 from "@/assets/images/convite2.jpg";
-import convite3 from "@/assets/images/convite3.jpg";
+import imagem1 from "@/assets/images/imagem1.webp";
+import imagem2 from "@/assets/images/imagem2.webp";
+import imagem3 from "@/assets/images/imagem3.webp";
 
 import {
   CheckIcon,
@@ -16,36 +16,36 @@ import InputIncrement from "@/components/shared/input-increment";
 const products = [
   {
     id: 1,
-    name: "Convite clássico",
+    name: "Shorts básico",
     href: "#",
-    price: "R$18,00",
-    color: "Rosa",
+    price: "R$99,00",
+    color: "Preto",
     inStock: true,
-    size: "Pequeno",
-    imageSrc: convite1,
+    size: "M",
+    imageSrc: imagem1,
     imageAlt: "Convite rosa",
   },
   {
     id: 2,
-    name: "Convite de luxo",
+    name: "Cropped básico",
     href: "#",
     price: "R$129,00",
-    color: "Bege",
+    color: "Preto",
     inStock: false,
     leadTime: "3–4 semanas",
-    size: "Grande",
-    imageSrc: convite2,
+    size: "P",
+    imageSrc: imagem2,
     imageAlt: "Convite bege",
   },
   {
     id: 3,
-    name: "Convite rústico",
+    name: "Camisa básica",
     href: "#",
-    price: "R$45,00",
+    price: "R$118,00",
     color: "Verde grama",
-    size: "Médio",
+    size: "M",
     inStock: true,
-    imageSrc: convite3,
+    imageSrc: imagem3,
     imageAlt: "Convite verde",
   },
 ];
@@ -56,8 +56,8 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 pb-24 pt-6 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h1 className="text-3xl font-bold tracking-tight text-salgueiro sm:text-4xl">
-          Meu carrinho
+        <h1 className="text-3xl font-bold tracking-tight text-black sm:text-3xl">
+          MEU CARRINHO
         </h1>
         <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
           <section aria-labelledby="cart-heading" className="lg:col-span-7">
@@ -159,7 +159,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">R$192,00</dd>
+                <dd className="text-sm font-medium text-gray-900">R$346,00</dd>
               </div>
 
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
@@ -187,7 +187,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                   Pedido total
                 </dt>
                 <dd className="text-base font-medium text-gray-900">
-                  R$192,00
+                  R$346,00
                 </dd>
               </div>
             </dl>
@@ -195,9 +195,9 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full rounded-md border border-transparent bg-tomilho-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-tomilho-700 focus:outline-none focus:ring-2 focus:ring-tomilho-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                className="w-full rounded-md border border-transparent bg-black px-4 py-3 text-base font-medium text-white shadow-sm hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-50"
               >
-                Enviar
+                ENVIAR
               </button>
             </div>
           </section>

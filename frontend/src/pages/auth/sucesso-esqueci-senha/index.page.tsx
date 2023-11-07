@@ -11,14 +11,12 @@ import { ReactElement } from "react";
 const Page: NextPageWithLayout = () => {
   return (
     <main className="isolate">
-      {/* Hero section */}
-
       <div className="mx-auto max-w-7xl text-center px-4 pb-32 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto max-w-xl text-center">
           <div className="mt-12 text-lg leading-8 text-gray-600">
             <p className="text-center my-10">
-              Quase lá! <b className="text-tomilho-500">Acesse sua conta</b>{" "}
-              para continuar o processo de recuperação de senha.
+              Quase lá! <b className="text-off-red">Acesse sua conta</b> para
+              continuar o processo de recuperação de senha.
             </p>
 
             <p className="text-sm">

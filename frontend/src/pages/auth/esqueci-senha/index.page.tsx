@@ -68,8 +68,8 @@ const Page: NextPageWithLayout = () => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex min-h-full flex-1 flex-col justify-center px-4 pb-56 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mt-10 mb-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-            <h2 className="mb-6 text-2xl font-semibold leading-9 tracking-tight text-tomilho-800">
-              Esqueci minha senha
+            <h2 className="mb-6 text-2xl font-semibold leading-9 tracking-tight text-black">
+              ESQUECI MINHA SENHA
             </h2>
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <Input
@@ -81,11 +81,11 @@ const Page: NextPageWithLayout = () => {
               />
 
               <Button type="submit" isLoading={isSubmitting}>
-                Enviar
+                ENVIAR
               </Button>
             </form>
           </div>
-          <BackButton title="voltar ao catálogo" />
+          <BackButton title="voltar a página principal" />
         </div>
       </div>
     </main>

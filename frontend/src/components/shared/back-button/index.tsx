@@ -12,7 +12,7 @@ export function BackButton({
   url = "/",
 }: BackButtonProps) {
   return (
-    <p className="text-tomilho-600 hover:text-tomilho-500">
+    <p className="text-black hover:opacity-75">
       <Link href={url} className="flex items-center gap-1 justify-center">
         <ArrowLeftIcon width={iconSize} /> {title}
       </Link>

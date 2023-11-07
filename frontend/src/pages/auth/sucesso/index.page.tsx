@@ -13,18 +13,15 @@ const Page: NextPageWithLayout = () => {
     <main className="isolate">
       <div className="mx-auto max-w-7xl text-center px-4 pb-32 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto max-w-3xl text-center ">
-          <h1 className="mt-8 text-2xl font-semibold leading-9 tracking-tight text-tomilho-800 text-center">
-            Bem vindo(a) a Vó Joana!
+          <h1 className="mt-8 text-2xl font-semibold leading-9 tracking-tight text-black text-center">
+            BEM VINDO(A) A DREAM<span className="text-off-red">FIT</span>!
           </h1>
 
           <div className="mt-12 text-lg leading-8 text-gray-600">
             <p className="text-center my-10">
               Obrigado por se cadastrar em nosso site. Para podermos dar
               continuidade ao seu cadastro, precisamos que você{" "}
-              <b className="text-tomilho-600">
-                confirme o seu endereço de e-mail
-              </b>
-              .
+              <b className="text-off-red">confirme o seu endereço de e-mail</b>.
             </p>
 
             <p className="text-sm">
@@ -58,7 +55,7 @@ const Page: NextPageWithLayout = () => {
               />
             </Link>
           </div>
-          <BackButton title="voltar ao catálogo" />
+          <BackButton title="voltar a página principal" />
         </div>
       </div>
     </main>

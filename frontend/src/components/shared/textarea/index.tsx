@@ -41,8 +41,8 @@ const TextareaBase: ForwardRefRenderFunction<
     return `block w-full rounded-md border-0 py-3 text-gray-700 pl-3 ring-1 ring-inset  placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6 min-h-[100px] ${
       error
         ? "focus:ring-red-500 ring-red-500"
-        : "ring-gray-300 focus:ring-tomilho-600 "
-    } ${isFilled && "ring-tomilho-600 ring-1"}`;
+        : "ring-gray-300 focus:ring-black "
+    } ${isFilled && "ring-black ring-1"}`;
   }
 
   return (

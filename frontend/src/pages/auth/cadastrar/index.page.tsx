@@ -110,14 +110,15 @@ const Page: NextPageWithLayout = () => {
         <div className="flex flex-1 flex-col px-4  pb-32 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-lg lg:w-[500px]">
             <div>
-              <h2 className="mt-8 text-2xl font-semibold leading-9 tracking-tight text-tomilho-800 text-center">
-                Crie sua conta na Vó Joana
+              <h2 className="mt-8 text-2xl font-semibold leading-9 tracking-tight text-black text-center">
+                CRIE SUA CONTA NA DREAM
+                <span className="text-off-red">FIT</span>
               </h2>
               <p className="mt-2 text-sm leading-6 text-gray-500 text-center">
                 Já tem uma conta?{" "}
                 <Link
                   href="/auth/login"
-                  className="font-semibold text-tomilho-600 hover:text-tomilho-500"
+                  className="font-semibold text-off-red hover:text-opacity-75"
                 >
                   Entrar
                 </Link>
@@ -183,18 +184,18 @@ const Page: NextPageWithLayout = () => {
 
                   <p className="text-sm text-gray-600">
                     Ao clicar em cadastrar, você concorda com nossas{" "}
-                    <span className="text-tomilho-600">
+                    <span className="text-black">
                       <Link href="/politicas-termos">
                         políticas de privacidade e nossos termos
                       </Link>
                     </span>
                   </p>
                   <Button type="submit" isLoading={isSubmitting}>
-                    Cadastrar
+                    CADASTRAR
                   </Button>
                 </form>
               </div>
-              <BackButton title="voltar ao catálogo" />
+              <BackButton title="VOLTAR A PÁGINA PRINCIPAL" />
             </div>
           </div>
         </div>

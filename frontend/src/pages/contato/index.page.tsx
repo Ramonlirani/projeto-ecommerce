@@ -134,10 +134,10 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
         <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
           <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
             <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-              <h2 className="text-3xl font-bold tracking-tight text-tomilho-700">
-                Entrar em Contato
+              <h2 className="text-3xl font-bold tracking-tight text-black">
+                ENTRAR EM CONTATO
               </h2>
-              <p className="mt-6 text-lg leading-8 text-tomilho-700 ">
+              <p className="mt-6 text-lg leading-8 text-jet ">
                 Para ter informações sobre álbuns e serviços. Caso queira dar
                 uma sugestão, elogio ou mesmo reclamação. Para nós, tua mensagem
                 é muito importante.
@@ -148,7 +148,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                     <dt className="flex-none">
                       <span className="sr-only">Address</span>
                       <BuildingOffice2Icon
-                        className="h-7 w-6 text-gray-400"
+                        className="h-7 w-6 text-black"
                         aria-hidden="true"
                       />
                     </dt>
@@ -187,7 +187,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                   <dt className="flex-none">
                     <span className="sr-only">Email</span>
                     <EnvelopeIcon
-                      className="h-7 w-6 text-tomilho-600"
+                      className="h-7 w-6 text-off-red"
                       aria-hidden="true"
                     />
                   </dt>
@@ -196,7 +196,9 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                       className="text-gray-600 hover:text-gray-900 font-semibold"
                       href="mailto:hello@example.com"
                     >
-                      contato@vojoanaconvites.com.br
+                      contato@dream
+                      <span className="text-off-red">fit</span>
+                      .com.br
                     </a>
                   </dd>
                 </div>
@@ -265,7 +267,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
               <div className="sm:col-span-2">
                 <div>
                   <Input
-                    label="Nome"
+                    label="NOME"
                     placeholder="Digite seu nome completo"
                     {...register("name")}
                     error={errors.name}
@@ -275,7 +277,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 <div className="sm:col-span-2">
                   <div className="mt-2.5">
                     <Input
-                      label="Email"
+                      label="EMAIL"
                       placeholder="seu-nome@exemplo.com"
                       {...register("email")}
                       error={errors.email}
@@ -287,7 +289,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                     <InputMask
                       control={control}
                       name="phoneNumber"
-                      label="Número do telefone"
+                      label="NÚMERO DO TELEFONE"
                       placeholder="(22) 22222-2222"
                       format="(##) #####-####"
                       error={errors.phoneNumber}
@@ -297,7 +299,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 <div className="sm:col-span-2">
                   <div className="mt-2.5">
                     <TextArea
-                      label="Mensagem"
+                      label="MENSAGEM"
                       placeholder="Digite sua mensagem"
                       {...register("message")}
                       error={errors.message}
@@ -307,7 +309,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
               </div>
               <div className="mt-8 flex justify-end">
                 <Button type="submit" disabled={isLoading}>
-                  Enviar mensagem
+                  ENVIAR MENSAGEM
                 </Button>
               </div>
             </div>

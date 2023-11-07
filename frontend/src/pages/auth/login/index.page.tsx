@@ -99,14 +99,14 @@ const Page: NextPageWithLayout = () => {
         <div className="flex flex-1 flex-col px-4 pb-32 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
-              <h2 className="mt-8 text-2xl font-semibold leading-9 tracking-tight text-tomilho-800 text-center">
-                Acesse ao seu perfil da Vó
+              <h2 className="mt-8 text-2xl font-semibold leading-9 tracking-tight text-black text-center">
+                ACESSE AO SEU PERFIL DA DREAMFIT
               </h2>
               <p className="mt-2 text-sm leading-6 text-gray-500 text-center">
                 Não tem uma conta ainda?{" "}
                 <Link
                   href="/auth/cadastrar"
-                  className="font-semibold text-tomilho-600 hover:text-tomilho-500"
+                  className="font-semibold text-off-red hover:opacity-75"
                 >
                   Crie sua conta de graça
                 </Link>
@@ -137,7 +137,7 @@ const Page: NextPageWithLayout = () => {
                     <div className="text-sm leading-6">
                       <Link
                         href="/auth/esqueci-senha"
-                        className="font-semibold text-tomilho-600 hover:text-tomilho-500"
+                        className="font-semibold text-black hover:opacity-75"
                       >
                         Esqueceu a senha?
                       </Link>
@@ -145,11 +145,11 @@ const Page: NextPageWithLayout = () => {
                   </div>
 
                   <Button isLoading={isLoading} type="submit">
-                    Entrar
+                    ENTRAR
                   </Button>
                 </form>
               </div>
-              <BackButton title="voltar ao catálogo" />
+              <BackButton title="voltar a página principal" />
             </div>
           </div>
         </div>

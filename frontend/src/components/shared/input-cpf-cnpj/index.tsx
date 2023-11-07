@@ -35,8 +35,8 @@ export function InputCpfCnpj({
     return `block w-full rounded-md border-0 py-3 text-gray-700 ring-1 ring-inset  placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6 ${
       error
         ? "focus:ring-red-500 ring-red-500"
-        : "ring-gray-300 focus:ring-tomilho-600 "
-    } ${isFilled && "ring-tomilho-600 ring-1"}
+        : "ring-gray-300 focus:ring-black "
+    } ${isFilled && "ring-black ring-1"}
     ${Icon ? "pl-10" : "pl-3"}`;
   }
 
@@ -74,7 +74,7 @@ export function InputCpfCnpj({
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <Icon
               className={`h-5 w-5 ${
-                isFilled ? "text-tomilho-600" : "text-tomilho-400"
+                isFilled ? "text-black" : "text-jet"
               } opacity-80 `}
               aria-hidden="true"
             />
