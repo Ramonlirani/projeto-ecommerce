@@ -104,6 +104,12 @@ const Page: NextPageWithLayout = () => {
                             scope="col"
                             className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                           >
+                            Desconto
+                          </th>
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                          >
                             Descrição
                           </th>
                           <th
@@ -139,6 +145,9 @@ const Page: NextPageWithLayout = () => {
                             </td>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
                               {formatNumber({ number: product.price })}
+                            </td>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
+                              {formatNumber({ number: product.discount })}
                             </td>
                             <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
                               {product.description}

@@ -43,9 +43,19 @@ const schema = z.object({
 
     return Number(z.coerce.string().parse(floatValue));
   }, z.coerce.number({ invalid_type_error: "O valor é obrigatório" }).min(0.01, { message: "O valor mínimo é de R$ 0,01" })),
+  discount: z.preprocess((a: any) => {
+    const value = a.toString();
+    const floatValue = parseFloat(
+      value.replace(/[^\d,-]/g, "").replace(",", ".")
+    );
+
+    return Number(z.coerce.string().parse(floatValue));
+  }, z.coerce.number({ invalid_type_error: "O valor é obrigatório" })),
   productCategoryId: z
     .string({ required_error: "Categoria do faq é obrigatório" })
     .nonempty({ message: "Categoria do faq é obrigatório" }),
+  color: z.string().nonempty({ message: "Cor é obrigatória" }),
+  size: z.string().nonempty({ message: "O tamanho é obrigatório" }),
   shortDescription: z.string().nonempty({ message: "Mensagem é obrigatória" }),
   description: z.string().nonempty({ message: "Mensagem é obrigatória" }),
   active: z.boolean().default(true),
@@ -87,6 +97,9 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       name: product?.name || "",
       active: get(product, "active", true),
       price: product?.price || 0,
+      color: product?.color || "",
+      size: product?.size || "",
+      discount: product?.discount || 0,
       description: product?.description || "",
       shortDescription: product?.shortDescription || "",
       imageUrl: product.imageUrl || "",
@@ -134,6 +147,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       const subcategoryIds = watch("subcategories");
 
       formData.subcategories = subcategoryIds;
+      console.log(formData, "formData");
 
       const response = await createOrUpdate({
         currentEntity: product,
@@ -179,13 +193,22 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 error={errors.imageUrl}
               />
             </div>
-            <div className="col-span-3 sm:col-span-3 flex items-center justify-between">
+            <div className="col-span-full">
               <Input
                 isRequired
                 divClasses="w-full"
                 label="Nome do produto"
                 {...register("name")}
                 error={errors.name}
+              />
+            </div>
+            <div className="col-span-3 sm:col-span-3 flex items-center justify-between">
+              <Input
+                isRequired
+                divClasses="w-full"
+                label="Tamanho do produto"
+                {...register("size")}
+                error={errors.size}
               />
             </div>
             <div className="col-span-3 sm:col-span-3 flex items-center justify-between ">
@@ -196,6 +219,26 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 label="Preço"
                 {...register("price")}
                 error={errors.price}
+              />
+            </div>
+
+            <div className="col-span-3 sm:col-span-3 flex items-center justify-between">
+              <InputDecimal
+                control={control}
+                divClasses="w-full"
+                label="Desconto"
+                {...register("discount")}
+                error={errors.discount}
+              />
+            </div>
+
+            <div className="col-span-3 sm:col-span-3 flex items-center justify-between">
+              <Input
+                isRequired
+                divClasses="w-full"
+                label="Cor"
+                {...register("color")}
+                error={errors.color}
               />
             </div>
             <div className="col-span-3 sm:col-span-3 flex items-center justify-between ">
