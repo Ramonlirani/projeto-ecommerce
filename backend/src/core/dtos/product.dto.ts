@@ -17,6 +17,18 @@ export class CreateProductDto {
   @IsNotEmpty()
   price: number;
 
+  @IsNumber()
+  @IsNotEmpty()
+  discount: number;
+
+  @IsString()
+  @IsNotEmpty()
+  size: string;
+
+  @IsString()
+  @IsNotEmpty()
+  color: string;
+
   @IsString()
   @IsNotEmpty()
   shortDescription: string;

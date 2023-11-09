@@ -121,8 +121,8 @@ export function Sidebar({
                                   href={item.webUrl}
                                   className={classNames(
                                     item.current
-                                      ? "bg-gray-50 text-green-600"
-                                      : "text-gray-700 hover:text-green-600 hover:bg-gray-50",
+                                      ? "bg-gray-50 text-black"
+                                      : "text-gray-700 hover:text-black hover:bg-gray-50",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
@@ -130,7 +130,7 @@ export function Sidebar({
                                     name={item.icon! as IconName}
                                     className={classNames(
                                       item.current
-                                        ? "text-green-600"
+                                        ? "text-black"
                                         : "text-gray-400 group-hover:text-green-600",
                                       "h-6 w-6 shrink-0"
                                     )}
@@ -173,8 +173,8 @@ export function Sidebar({
                         href={item.webUrl}
                         className={classNames(
                           item.current
-                            ? "bg-gray-50 text-green-600"
-                            : "text-gray-700 hover:text-green-600 hover:bg-gray-50",
+                            ? "bg-gray-50 text-off-red"
+                            : "text-gray-700 hover:text-off-red hover:bg-gray-50",
                           "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                         )}
                       >
@@ -182,8 +182,8 @@ export function Sidebar({
                           name={item.icon! as IconName}
                           className={classNames(
                             item.current
-                              ? "text-green-600"
-                              : "text-gray-400 group-hover:text-green-600",
+                              ? "text-off-red"
+                              : "text-gray-400 group-hover:text-off-red",
                             "h-6 w-6 shrink-0"
                           )}
                           aria-hidden="true"

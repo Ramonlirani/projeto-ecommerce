@@ -24,6 +24,9 @@ export class ProductUseCases {
         data: {
           name: newProduct.name,
           price: newProduct.price,
+          discount: newProduct.discount,
+          color: newProduct.color,
+          size: newProduct.size,
           shortDescription: newProduct.shortDescription,
           description: newProduct.description,
           productCategoryId: newProduct.productCategoryId,

@@ -13,6 +13,9 @@ export class ProductFactoryService
     const newProduct = new Product();
     newProduct.name = createProductDto.name;
     newProduct.price = createProductDto.price;
+    newProduct.discount = createProductDto.discount;
+    newProduct.color = createProductDto.color;
+    newProduct.size = createProductDto.size;
     newProduct.shortDescription = createProductDto.shortDescription;
     newProduct.description = createProductDto.description;
     newProduct.productCategoryId = createProductDto.productCategoryId;
@@ -27,6 +30,9 @@ export class ProductFactoryService
     const updateProduct = new Product();
     updateProduct.name = updateProductDto.name;
     updateProduct.price = updateProductDto.price;
+    updateProduct.discount = updateProductDto.discount;
+    updateProduct.color = updateProductDto.color;
+    updateProduct.size = updateProductDto.size;
     updateProduct.shortDescription = updateProductDto.shortDescription;
     updateProduct.description = updateProductDto.description;
     updateProduct.productCategoryId = updateProductDto.productCategoryId;

@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, useState } from "react";
 import { Control, Controller, FieldError } from "react-hook-form";
-import { NumberFormatBase } from "react-number-format";
+import { NumberFormatBase, NumericFormat } from "react-number-format";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 
 interface InputDecimalProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -36,21 +36,10 @@ export function InputDecimal({
     return `block w-full rounded-md border-0 py-3 text-gray-700 ring-1 ring-inset  placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6 ${
       error
         ? "focus:ring-red-500 ring-red-500"
-        : "ring-gray-300 focus:ring-tomilho-600"
-    } ${isFilled && "ring-tomilho-600 ring-1"}
+        : "ring-gray-300 focus:ring-black"
+    } ${isFilled && "ring-black ring-1"}
     ${Icon ? "pl-10" : "pl-3"}`;
   }
-
-  const currencyFormatter = (value: any) => {
-    if (!Number(value)) return "";
-
-    const amount = new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(value / 100);
-
-    return `${amount}`;
-  };
 
   return (
     <div className={divClasses}>
@@ -67,7 +56,7 @@ export function InputDecimal({
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <Icon
               className={`h-5 w-5 ${
-                isFilled ? "text-tomilho-600" : "text-gray-400"
+                isFilled ? "text-black" : "text-gray-400"
               } opacity-80 `}
               aria-hidden="true"
             />
@@ -77,16 +66,17 @@ export function InputDecimal({
         <Controller
           control={control}
           name={name}
+          defaultValue={0}
           render={({ field: { onChange, name, value } }) => (
-            <NumberFormatBase
+            <NumericFormat
               prefix="R$ "
+              decimalSeparator=","
               name={name}
               value={value}
               onChange={onChange}
               onBlur={(event) => handleInputBlur(event)}
               className={getClasses()}
               placeholder={placeholder || label}
-              format={currencyFormatter}
             />
           )}
         />

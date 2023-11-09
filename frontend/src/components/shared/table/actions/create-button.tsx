@@ -29,7 +29,7 @@ export function CreateButton({ children, modelName, url }: CreateButtonProps) {
     <div className="sm:flex-none">
       <Link
         href={url}
-        className="block rounded-md bg-tomilho-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-tomilho-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tomilho-600"
+        className="block rounded-md bg-black px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
         data-tooltip-id="tooltipId-create-button"
         data-tooltip-content={`Adicionar ${modelNameDictionary[modelName]}`}
       >

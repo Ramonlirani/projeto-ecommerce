@@ -118,6 +118,9 @@ model Product {
   id               String  @id @default(uuid())
   name             String  @db.VarChar(255)
   price            Int
+  discount         Int
+  size             String
+  color            String
   description      String
   shortDescription String  @map("short_description")
   active           Boolean @default(true)
