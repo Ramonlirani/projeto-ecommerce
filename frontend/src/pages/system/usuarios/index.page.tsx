@@ -55,11 +55,6 @@ const Page: NextPageWithLayout = () => {
                 mode: "insensitive",
               },
             },
-            {
-              codeToIndicate: {
-                contains: search,
-              },
-            },
           ],
         },
       },
@@ -132,18 +127,7 @@ const Page: NextPageWithLayout = () => {
                             >
                               E-mail/Telefone
                             </th>
-                            <th
-                              scope="col"
-                              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                            >
-                              Código
-                            </th>
-                            <th
-                              scope="col"
-                              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                            >
-                              Indicado por
-                            </th>
+
                             <th
                               scope="col"
                               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -185,12 +169,7 @@ const Page: NextPageWithLayout = () => {
                                   {user.phoneNumber || "Telefone não informado"}
                                 </p>
                               </td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                {user.codeToIndicate}
-                              </td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                {user.codeIndicatedBy || "-----"}
-                              </td>
+
                               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 {formatDate({ date: new Date(user.createdAt) })}
                               </td>
