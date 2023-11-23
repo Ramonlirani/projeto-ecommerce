@@ -1,7 +1,6 @@
 import { ReactElement, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { requireAuthentication } from "@/helpers/require-authentication";
 import { NextPageWithLayout } from "@/interfaces/NextPageWithLayout";
 import { PaginationResponse } from "@/interfaces/PaginationResponse";
 import { Pagination } from "@/components/shared/pagination";
@@ -14,8 +13,6 @@ import { EditButton } from "@/components/shared/table/actions/edit-button";
 import { CreateButton } from "@/components/shared/table/actions/create-button";
 import { Product } from "@/interfaces/Product";
 import { formatNumber } from "@/helpers/format-number";
-import { ProductCategory } from "@/interfaces/ProductCategory";
-import { SubCategory } from "@/interfaces/SubCategory";
 
 const url = "products";
 
@@ -28,7 +25,6 @@ const Page: NextPageWithLayout = () => {
     keepPreviousData: true,
   });
   const hasItems = data?.data?.length as number;
-  console.log(data?.data);
 
   async function fetchPagination(
     page: number
