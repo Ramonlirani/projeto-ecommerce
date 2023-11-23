@@ -1,15 +1,30 @@
-const breadcrumb = {
-  breadcrumbs: [
-    { id: 0, name: "Home", href: "#" },
-    { id: 1, name: "Convites", href: "#" },
-    { id: 2, name: "Clássicos", href: "#" },
-  ],
-};
+import { ProductCategory } from "@/interfaces/ProductCategory";
+import { SubCategory } from "@/interfaces/SubCategory";
 
-export default function Breadcrumbs() {
+interface BreadcrumbsProps {
+  subcategories: SubCategory[];
+  productCategory: ProductCategory;
+}
+
+export default function Breadcrumbs({
+  subcategories,
+  productCategory,
+}: BreadcrumbsProps) {
+  const breadcrumb = {
+    options: [
+      { id: 0, name: "Home", href: "/" },
+      { id: productCategory.id, name: productCategory.name, href: "#" },
+      {
+        id: subcategories.map((index) => index.id).join(),
+        name: subcategories.map((item) => item.name).join(),
+        href: "#",
+      },
+    ],
+  };
+
   return (
     <>
-      {breadcrumb.breadcrumbs.map((breadcrumb) => (
+      {breadcrumb.options.map((breadcrumb) => (
         <li key={breadcrumb.id}>
           <div className="flex items-center">
             <a
