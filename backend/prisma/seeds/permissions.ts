@@ -51,14 +51,14 @@ export async function permissions(prisma: PrismaClient) {
           icon: 'UsersIcon',
           order: 5,
         },
-        {
-          name: 'Configuração',
-          webUrl: '/system/configuracao',
-          webUrlBase: 'configuracao',
-          modelName: 'configuration',
-          icon: 'Cog6ToothIcon',
-          order: 6,
-        },
+        // {
+        //   name: 'Configuração',
+        //   webUrl: '/system/configuracao',
+        //   webUrlBase: 'configuracao',
+        //   modelName: 'configuration',
+        //   icon: 'Cog6ToothIcon',
+        //   order: 6,
+        // },
         {
           name: 'Níveis de acesso',
           webUrl: '/system/nivel-acesso',
