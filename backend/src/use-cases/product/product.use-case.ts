@@ -104,6 +104,20 @@ export class ProductUseCases {
     return entity;
   }
 
+  async getProductLaunches() {
+    const launches = await this.prismaService.product.findMany({
+      where: {
+        deletedAt: null,
+      },
+      take: 5,
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    return launches;
+  }
+
   async deleteWithTimestamp(id: string) {
     try {
       await this.getById(id);
