@@ -131,7 +131,7 @@ export function Sidebar({
                                     className={classNames(
                                       item.current
                                         ? "text-black"
-                                        : "text-gray-400 group-hover:text-green-600",
+                                        : "text-gray-400 group-hover:text-off-red",
                                       "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
