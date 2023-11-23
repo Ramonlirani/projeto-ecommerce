@@ -13,10 +13,10 @@ export default function Breadcrumbs({
   const breadcrumb = {
     options: [
       { id: 0, name: "Home", href: "/" },
-      { id: productCategory.id, name: productCategory.name, href: "#" },
+      { id: productCategory?.id, name: productCategory?.name, href: "#" },
       {
-        id: subcategories.map((index) => index.id).join(),
-        name: subcategories.map((item) => item.name).join(),
+        id: subcategories?.map((index) => index?.id).join(),
+        name: subcategories?.map((item) => item?.name).join(),
         href: "#",
       },
     ],

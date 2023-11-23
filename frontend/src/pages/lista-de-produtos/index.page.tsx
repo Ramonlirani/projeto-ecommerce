@@ -8,6 +8,9 @@ import Breadcrumbs from "@/components/shared/breadcrumbs";
 import SelectMenu from "@/components/shared/select-menu";
 import { CardProduct } from "@/components/shared/card-product";
 import { Pagination } from "@/components/shared/pagination";
+import { PaginationResponse } from "@/interfaces/PaginationResponse";
+import { Product } from "@/interfaces/Product";
+import { useQuery } from "@tanstack/react-query";
 
 const filters = [
   {
@@ -60,93 +63,38 @@ const optionsSortBy = [
 
 const totalItems = [5, 10, 15, 20, 25];
 
-const products = [
-  {
-    id: 1,
-    name: "Convite de luxo",
-    href: "#",
-    price: "R$ 256",
-    description:
-      "Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.",
-    options: "8 colors",
-    imageSrc: "./invitations/convite1.jpg",
-    secondaryImage: "./invitations/convite4.jpg",
-    imageAlt:
-      "Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.",
-  },
-  {
-    id: 2,
-    name: "Convite clássico",
-    href: "#",
-    price: "R$ 32",
-    description:
-      "Look like a visionary CEO and wear the same black t-shirt every day.",
-    options: "Black",
-    imageSrc: "./invitations/convite2.jpg",
-    secondaryImage: "./invitations/convite4.jpg",
-    imageAlt: "Front of plain black t-shirt.",
-  },
-  {
-    id: 3,
-    name: "Convite de luxo",
-    href: "#",
-    price: "R$ 256",
-    description:
-      "Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.",
-    options: "8 colors",
-    imageSrc: "./invitations/convite1.jpg",
-    secondaryImage: "./invitations/convite4.jpg",
-    imageAlt:
-      "Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.",
-  },
-  {
-    id: 4,
-    name: "Convite clássico",
-    href: "#",
-    price: "R$ 42",
-    description:
-      "Look like a visionary CEO and wear the same black t-shirt every day.",
-    options: "Black",
-    imageSrc: "./invitations/convite2.jpg",
-    secondaryImage: "./invitations/convite4.jpg",
-    imageAlt: "Front of plain black t-shirt.",
-  },
-  {
-    id: 5,
-    name: "Convite de luxo",
-    href: "#",
-    price: "R$ 214",
-    description:
-      "Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.",
-    options: "8 colors",
-    imageSrc: "./invitations/convite1.jpg",
-    secondaryImage: "./invitations/convite4.jpg",
-    imageAlt:
-      "Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.",
-  },
-  {
-    id: 6,
-    name: "Convite clássico",
-    href: "#",
-    price: "R$ 13",
-    description:
-      "Look like a visionary CEO and wear the same black t-shirt every day.",
-    options: "Black",
-    imageSrc: "./invitations/convite2.jpg",
-    secondaryImage: "./invitations/convite4.jpg",
-    imageAlt: "Front of plain black t-shirt.",
-  },
-];
-
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 interface PageProps {}
 
+const url = "products";
+
 const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [page, setPage] = useState(1);
+
+  const { isLoading, data, refetch } = useQuery({
+    queryKey: ["product", page],
+    queryFn: () => fetchPagination(page),
+    keepPreviousData: true,
+  });
+  const hasItems = data?.data?.length as number;
+
+  async function fetchPagination(
+    page: number
+  ): Promise<PaginationResponse<Product>> {
+    const body = JSON.stringify({
+      body: { page, where: { deletedAt: null } },
+      url,
+    });
+
+    return fetch("/api/pagination", {
+      method: "POST",
+      body,
+    }).then((res) => res.json());
+  }
 
   return (
     <>
@@ -234,7 +182,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                                         name={`${section.id}[]`}
                                         defaultValue={option.value}
                                         type="checkbox"
-                                        className="h-4 w-4 rounded border-gray-300 text-tomilho-400 focus:ring-tomilho-400"
+                                        className="h-4 w-4 rounded border-gray-300 text-off-red focus:ring-off-red"
                                       />
                                       <label
                                         htmlFor={`${section.id}-${optionIdx}-mobile`}
@@ -262,7 +210,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
               <Breadcrumbs />
             </ol>
             <div className="border-b border-gray-200 pb-10 pt-6">
-              <h1 className="text-4xl font-bold tracking-tight text-salgueiro">
+              <h1 className="text-4xl font-bold tracking-tight text-black">
                 Convites
               </h1>
               <p className="mt-4 text-base text-gray-500">
@@ -276,7 +224,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 <h2 className="sr-only">Filters</h2>
                 <button
                   type="button"
-                  className="inline-flex items-center lg:hidden bg-tomilho-500 p-3 rounded-md"
+                  className="inline-flex items-center lg:hidden bg-black p-3 rounded-md"
                   onClick={() => setMobileFiltersOpen(true)}
                 >
                   <span className="text-sm font-medium text-white">
@@ -312,7 +260,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                                   name={`${section.id}[]`}
                                   defaultValue={option.value}
                                   type="checkbox"
-                                  className="h-4 w-4 rounded border-gray-300 text-tomilho-400 focus:ring-tomilho-400"
+                                  className="h-4 w-4 rounded border-gray-300 text-off-red focus:ring-off-red"
                                 />
                                 <label
                                   htmlFor={`${section.id}-${optionIdx}`}
@@ -338,14 +286,16 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                   />
                 </div>
                 <div className="grid grid-cols-1 gap-y-4 pt-12 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-4">
-                  {products.map((product: any) => (
+                  {data?.data.map((product: any) => (
                     <CardProduct key={product.id} product={product} />
                   ))}
                 </div>
               </div>
             </div>
             <div className="flex justify-center mt-20">
-              <Pagination meta={1} setPage={setPage} />
+              {!isLoading && hasItems > 0 && (
+                <Pagination meta={data!.meta} setPage={setPage} />
+              )}
             </div>
           </main>
         </div>
