@@ -12,45 +12,6 @@ import { PaginationResponse } from "@/interfaces/PaginationResponse";
 import { Product } from "@/interfaces/Product";
 import { useQuery } from "@tanstack/react-query";
 
-const filters = [
-  {
-    id: "model",
-    name: "Modelos",
-    options: [
-      { value: "classic", label: "Clássico" },
-      { value: "modern", label: "Moderno" },
-      { value: "rustic", label: "Rústico" },
-      { value: "laser", label: "Laser" },
-      { value: "luxurious", label: "Luxuoso" },
-    ],
-  },
-  {
-    id: "category",
-    name: "Categorias",
-    options: [
-      { value: "invitation", label: "Convites" },
-      { value: "godparents", label: "Padrinhos" },
-      { value: "fineStationery", label: "Papelaria Fina" },
-      { value: "toilet", label: "Toilet" },
-      { value: "schedules", label: "Agendas" },
-    ],
-  },
-  {
-    id: "color",
-    name: "Cores",
-    options: [
-      { value: "white", label: "Branco" },
-      { value: "beige", label: "Bege" },
-      { value: "blue", label: "Azul" },
-      { value: "brown", label: "Marrom" },
-      { value: "green", label: "Verde" },
-      { value: "purple", label: "Roxo" },
-      { value: "red", label: "Vermelho" },
-      { value: "black", label: "Preto" },
-    ],
-  },
-];
-
 const optionsSortBy = [
   "Mais relevantes",
   "Novidades",
@@ -67,13 +28,17 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-interface PageProps {}
+type FilterType = "category" | "color";
 
 const url = "products";
 
-const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
+const Page: NextPageWithLayout = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+    null
+  );
 
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["product", page],
@@ -95,6 +60,54 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       body,
     }).then((res) => res.json());
   }
+
+  const handleSelection = (value: string, type: FilterType) => {
+    if (type === "category") {
+      setSelectedCategoryId((prevValue) =>
+        prevValue === value ? null : value
+      );
+    } else if (type === "color") {
+      setSelectedColor((prevValue) => (prevValue === value ? null : value));
+    }
+    refetch();
+  };
+
+  const filteredProducts =
+    data?.data?.filter((product) => {
+      const matchesCategory =
+        selectedCategoryId === null ||
+        product.category?.name.toLowerCase() === selectedCategoryId;
+      const matchesColor =
+        selectedColor === null || product.color.toLowerCase() === selectedColor;
+      return matchesCategory && matchesColor;
+    }) || data?.data;
+
+  const categories = (
+    data?.data?.map((product) => product.category?.name.toLowerCase()) || []
+  ).filter(Boolean);
+
+  const colors = (
+    data?.data?.map((product) => product.color.toLowerCase()) || []
+  ).filter(Boolean);
+
+  const uniqueCategories = [...new Set(categories)];
+  const uniqueColors = [...new Set(colors)];
+
+  const filters = [
+    {
+      id: "category",
+      name: "Categorias",
+      options: uniqueCategories.map((category) => ({
+        value: category,
+        label: category,
+      })),
+    },
+    {
+      id: "color",
+      name: "Cores",
+      options: uniqueColors.map((color) => ({ value: color, label: color })),
+    },
+  ];
 
   return (
     <>
@@ -206,16 +219,16 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
           </Transition.Root>
 
           <main className="mx-auto max-w-2xl px-4 sm:px-6 pb-16 pt-6 sm:pb-24 lg:max-w-7xl lg:px-8">
-            <ol role="list" className="flex items-center space-x-4 ">
+            {/* <ol role="list" className="flex items-center space-x-4 ">
               <Breadcrumbs />
-            </ol>
+            </ol> */}
             <div className="border-b border-gray-200 pb-10 pt-6">
               <h1 className="text-4xl font-bold tracking-tight text-black">
-                Convites
+                Produtos
               </h1>
               <p className="mt-4 text-base text-gray-500">
-                O momento mais aguardado que marca o início dos preparativos, os
-                convites é a parte mais esperada dos convidados.
+                Faça da sua roupa uma extensão do seu treino: DreamFit, a moda
+                que eleva seu condicionamento.
               </p>
             </div>
 
@@ -242,7 +255,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                   <form className="space-y-10 divide-y divide-gray-200">
                     {filters.map((section, sectionIdx) => (
                       <div
-                        key={section.name}
+                        key={`${section.name}-${sectionIdx}`}
                         className={sectionIdx === 0 ? "" : "pt-10"}
                       >
                         <fieldset>
@@ -252,7 +265,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                           <div className="space-y-3 pt-6">
                             {section.options.map((option, optionIdx) => (
                               <div
-                                key={option.value}
+                                key={`${option.value}-${optionIdx}`}
                                 className="flex items-center"
                               >
                                 <input
@@ -261,6 +274,15 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                                   defaultValue={option.value}
                                   type="checkbox"
                                   className="h-4 w-4 rounded border-gray-300 text-off-red focus:ring-off-red"
+                                  onChange={() => {
+                                    // Ensure that option.value is defined before calling handleSelection
+                                    if (option.value !== undefined) {
+                                      handleSelection(
+                                        option.value,
+                                        section.id as FilterType
+                                      );
+                                    }
+                                  }}
                                 />
                                 <label
                                   htmlFor={`${section.id}-${optionIdx}`}
@@ -286,7 +308,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                   />
                 </div>
                 <div className="grid grid-cols-1 gap-y-4 pt-12 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-4">
-                  {data?.data.map((product: any) => (
+                  {filteredProducts?.map((product: any) => (
                     <CardProduct key={product.id} product={product} />
                   ))}
                 </div>
