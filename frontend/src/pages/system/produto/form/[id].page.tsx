@@ -85,7 +85,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
     props.data
   );
 
-  const isEditing = get(product, "id");
+  const isEditing = get(product, productCategories, "id");
   const [subcategories, setSubcategories] = useState([]);
 
   const methods = useForm<FormData>({
@@ -102,7 +102,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       discount: product?.discount || 0,
       description: product?.description || "",
       shortDescription: product?.shortDescription || "",
-      imageUrl: product.imageUrl || "",
+      imageUrl: product?.imageUrl || "",
       subcategories:
         productCategories?.length > 0
           ? productCategories[0].subcategories?.map((subcategory) => ({
@@ -139,30 +139,26 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
   }, [watch("productCategoryId")]);
 
   async function onSubmit(formData: FormData) {
-    try {
-      const newPrice = get(formData, "price", 0);
+    const newPrice = get(formData, "price", 0);
 
-      formData.price = newPrice * 100;
+    formData.price = newPrice * 100;
 
-      const subcategoryIds = watch("subcategories");
+    const subcategoryIds = watch("subcategories");
 
-      formData.subcategories = subcategoryIds;
+    formData.subcategories = subcategoryIds;
 
-      const response = await createOrUpdate({
-        currentEntity: product,
-        formData,
-        entityName: "Produto",
-        url,
-      });
+    const response = await createOrUpdate({
+      currentEntity: product,
+      formData,
+      entityName: "Produto",
+      url,
+    });
 
-      if (get(response, "error", false)) {
-        return;
-      }
-
-      if (!isEditing) reset();
-    } catch (error) {
-      console.log("error", error);
+    if (get(response, "error", false)) {
+      return;
     }
+
+    if (!isEditing) reset();
   }
 
   return (
