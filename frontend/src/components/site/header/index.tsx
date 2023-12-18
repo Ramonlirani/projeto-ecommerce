@@ -8,8 +8,31 @@ import Image from "next/image";
 
 import { MenuUser } from "@/components/shared/menu-user";
 import { FlyoutMenu } from "@/components/shared/flyout-menu";
+import { useEffect, useState } from "react";
+import { Product } from "@/interfaces/Product";
+import fetchJson from "@/lib/fetch-json";
+
+interface ProductProps {
+  productCategories: Product[];
+  launches: Product[];
+}
 
 export function Header() {
+  const [product, setProduct] = useState<Product[]>([]);
+  const [launches, setLaunches] = useState<Product[]>([]);
+
+  useEffect(() => {
+    async function getProduct() {
+      try {
+        const response = await fetchJson<ProductProps>("/products/listAll");
+
+        setProduct(response.productCategories);
+        setLaunches(response.launches);
+      } catch (error) {}
+    }
+    getProduct();
+  }, []);
+
   return (
     <>
       <header className="grid items-center w-full z-50 bg-#f6e8ea h-34 px-10 lg:px-14 pt-8 ">
@@ -30,7 +53,7 @@ export function Header() {
               <Image src={dreamfit} className="w-36" alt="logo" />
             </a>
             <div className="hidden md:hidden lg:block lg:flex-1">
-              <FlyoutMenu />
+              <FlyoutMenu product={product} launches={launches} />
             </div>
             <a
               href="/carrinho"
@@ -46,7 +69,7 @@ export function Header() {
               <span className="sr-only">items in cart, view bag</span>
             </a>
             <div className="sm:block md:block lg:hidden justify-center items-center">
-              <FlyoutMenu />
+              <FlyoutMenu product={product} launches={launches} />
             </div>
           </div>
           <div className="flex text-white  lg:mx-auto lg:justify-end lg:space-x-5">

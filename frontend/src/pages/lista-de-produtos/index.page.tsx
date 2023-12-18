@@ -28,6 +28,11 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
+interface Unique {
+  colors: { [key: string]: boolean };
+  categories: { [key: string]: boolean };
+}
+
 type FilterType = "category" | "color";
 
 const url = "products";
@@ -82,16 +87,15 @@ const Page: NextPageWithLayout = () => {
       return matchesCategory && matchesColor;
     }) || data?.data;
 
-  const categories = (
-    data?.data?.map((product) => product.category?.name.toLowerCase()) || []
-  ).filter(Boolean);
+  const unique: Unique = { colors: {}, categories: {} };
 
-  const colors = (
-    data?.data?.map((product) => product.color.toLowerCase()) || []
-  ).filter(Boolean);
+  data?.data?.forEach((product) => {
+    unique.colors[product.color?.toLowerCase() ?? ""] = true;
+    unique.categories[product.category?.name?.toLowerCase() ?? ""] = true;
+  });
 
-  const uniqueCategories = [...new Set(categories)];
-  const uniqueColors = [...new Set(colors)];
+  const uniqueCategories = Object.keys(unique.categories).filter(Boolean);
+  const uniqueColors = Object.keys(unique.colors).filter(Boolean);
 
   const filters = [
     {
@@ -105,7 +109,10 @@ const Page: NextPageWithLayout = () => {
     {
       id: "color",
       name: "Cores",
-      options: uniqueColors.map((color) => ({ value: color, label: color })),
+      options: uniqueColors.map((color) => ({
+        value: color,
+        label: color,
+      })),
     },
   ];
 
