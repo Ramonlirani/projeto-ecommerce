@@ -15,6 +15,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import dreamfit from "@/assets/logo/dreamfit.png";
+import { Product } from "@/interfaces/Product";
 
 const navigation = {
   categories: [
@@ -308,8 +309,67 @@ const filters = [
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
+interface FlyoutMenuProps {
+  product: Product[];
+  launches: Product[];
+}
 
-export function FlyoutMenu() {
+export function FlyoutMenu({ product, launches }: FlyoutMenuProps) {
+  console.log(product);
+
+  const desiredCategories = [
+    "camisa",
+    "calça",
+    "blusa",
+    "top",
+    "acessório",
+    "kit",
+  ];
+
+  // Simulando a lista de produtos
+  const generateCategoryNavigation = (
+    categoryName: string,
+    products: Product[]
+  ) => {
+    const capitalizedCategoryName = categoryName.toUpperCase();
+
+    // Filtrar produtos apenas da categoria desejada
+    const filteredProducts = products.filter((item) => {
+      const itemCategoryName = item.category?.name.toLowerCase();
+      return itemCategoryName === categoryName;
+    });
+
+    return {
+      id: categoryName,
+      name: capitalizedCategoryName,
+      featured: filteredProducts.slice(0, 3).map((index) => ({
+        name: index.name,
+        href: "#",
+        imageSrc: index.imageUrl,
+        imageAlt: index.description,
+      })),
+      sections: [
+        {
+          id: "category",
+          name: "Categorias",
+          items: filteredProducts.map((index) => ({
+            name: index.category?.name,
+            href: "#",
+          })),
+        },
+      ],
+    };
+  };
+
+  // Filtrar apenas as categorias desejadas
+  const filteredCategories = desiredCategories
+    .map((categoryName) => generateCategoryNavigation(categoryName, product))
+    .filter((category) => category !== null);
+
+  const navigation = {
+    categories: filteredCategories,
+  };
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
