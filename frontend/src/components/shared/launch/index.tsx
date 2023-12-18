@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { CardProduct } from "../card-product";
 import { Product } from "@/interfaces/Product";
 
