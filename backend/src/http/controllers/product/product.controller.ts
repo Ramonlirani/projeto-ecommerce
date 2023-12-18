@@ -11,7 +11,6 @@ import { ProductCategoryUseCases } from '@use-cases/product-category/product-cat
 export class ProductController {
   constructor(
     private productUseCase: ProductUseCases,
-    private subCategoryUseCases: SubCategoryUseCases,
     private productCategoryUseCase: ProductCategoryUseCases,
   ) {}
   @Post()
@@ -51,14 +50,18 @@ export class ProductController {
     }
   }
 
-  // @Get('listAll')
-  // async list(@Res() response: Response) {
-  //   const productCategories = await this.productUseCase.listAll();
-  //   return response.status(200).json({
-  //     error: false,
-  //     productCategories,
-  //   });
-  // }
+  @Public()
+  @Get('/listAll')
+  async list(@Res() response: Response) {
+    const productCategories = await this.productUseCase.listAll();
+    const launches = await this.productUseCase.getProductLaunches();
+
+    return response.status(200).json({
+      error: false,
+      productCategories,
+      launches,
+    });
+  }
 
   @Public()
   @Get(':id')

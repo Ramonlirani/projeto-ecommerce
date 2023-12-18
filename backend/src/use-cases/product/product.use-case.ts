@@ -118,6 +118,27 @@ export class ProductUseCases {
     return launches;
   }
 
+  async listAll() {
+    const products = await this.prismaService.product.findMany({
+      include: {
+        category: {
+          select: {
+            id: true,
+            name: true,
+            subcategories: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return products;
+  }
+
   async deleteWithTimestamp(id: string) {
     try {
       await this.getById(id);
