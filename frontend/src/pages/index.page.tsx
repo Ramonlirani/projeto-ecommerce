@@ -1,4 +1,4 @@
-import { useState, type ReactElement, useEffect } from "react";
+import { type ReactElement } from "react";
 
 import { Layout } from "@/components/site/layout";
 import { NextPageWithLayout } from "@/interfaces/NextPageWithLayout";
