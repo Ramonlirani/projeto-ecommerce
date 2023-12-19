@@ -5,6 +5,7 @@ import convite4 from "@/assets/images/convite4.jpg";
 
 import { useState } from "react";
 import { CardProduct } from "@/components/shared/card-product";
+import HeadingAnimate from "@/components/shared/animate/HeadingAnimate";
 
 const products = [
   {
@@ -80,9 +81,11 @@ export function Bestseller() {
   return (
     <>
       <main className="mx-auto max-w-2xl px-4 lg:max-w-full lg:px-28">
-        <div className="border-b border-gray-200">
-          <p className="text-black font-semibold text-xl">MAIS VENDIDOS</p>
-        </div>
+        <HeadingAnimate amount={1}>
+          <div className="border-b border-gray-200">
+            <p className="text-black font-semibold text-xl">MAIS VENDIDOS</p>
+          </div>
+        </HeadingAnimate>
 
         <div className="pb-24 pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
           <section

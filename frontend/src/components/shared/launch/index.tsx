@@ -1,3 +1,5 @@
+import HeadingAnimate from "../animate/HeadingAnimate";
+import LoadAnimate from "../animate/LoadAnimate";
 import { CardProduct } from "../card-product";
 import { Product } from "@/interfaces/Product";
 
@@ -16,11 +18,13 @@ export function Launch({ productLaunches }: LaunchProps) {
         </div>
 
         <main className="mx-auto max-w-2xl px-4 lg:max-w-full lg:px-28">
-          <div className="border-b border-gray-200">
-            <p className="text-black font-semibold text-xl">
-              NOSSOS LANÇAMENTOS
-            </p>
-          </div>
+          <HeadingAnimate amount={1}>
+            <div className="border-b border-gray-200">
+              <p className="text-black font-semibold text-xl">
+                NOSSOS LANÇAMENTOS
+              </p>
+            </div>
+          </HeadingAnimate>
           <div className="pb-24 pt-12 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:grid-cols-4">
             <section
               aria-labelledby="product-heading"
