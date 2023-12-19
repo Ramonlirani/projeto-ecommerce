@@ -4,7 +4,7 @@
 
 FROM node:18-alpine As development
 
-WORKDIR /recordar/frontend
+WORKDIR /projeto-catalogo/frontend
 
 COPY --chown=node:node package*.json ./
 
@@ -20,11 +20,11 @@ USER node
 
 FROM node:18-alpine As build
 
-WORKDIR /recordar/frontend
+WORKDIR /projeto-catalogo/frontend
 
 COPY --chown=node:node package*.json ./
 
-COPY --chown=node:node --from=development /recordar/frontend/node_modules ./node_modules
+COPY --chown=node:node --from=development /projeto-catalogo/frontend/node_modules ./node_modules
 
 COPY --chown=node:node . .
 
@@ -42,10 +42,10 @@ USER node
 
 FROM node:18-alpine As production
 
-COPY --chown=node:node --from=build /recordar/frontend/package.json ./package.json
-COPY --chown=node:node --from=build /recordar/frontend/node_modules ./node_modules
-COPY --chown=node:node --from=build /recordar/frontend/public ./public
-COPY --chown=node:node --from=build /recordar/frontend/.next ./.next
-COPY --chown=node:node --from=build /recordar/frontend/.env ./.env
+COPY --chown=node:node --from=build /projeto-catalogo/frontend/package.json ./package.json
+COPY --chown=node:node --from=build /projeto-catalogo/frontend/node_modules ./node_modules
+COPY --chown=node:node --from=build /projeto-catalogo/frontend/public ./public
+COPY --chown=node:node --from=build /projeto-catalogo/frontend/.next ./.next
+COPY --chown=node:node --from=build /projeto-catalogo/frontend/.env ./.env
 
 CMD [ "npm", "run", "start"]

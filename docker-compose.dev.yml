@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRESQL_USERNAME=root
       - POSTGRESQL_PASSWORD=root
-      - POSTGRESQL_DATABASE=vojoanaconvitesdb
+      - POSTGRESQL_DATABASE=projeto-catalogodb
     ports:
       - 5433:5432
     healthcheck:
