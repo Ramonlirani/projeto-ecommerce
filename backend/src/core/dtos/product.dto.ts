@@ -47,7 +47,7 @@ export class CreateProductDto {
 
   @IsBoolean()
   @IsNotEmpty()
-  bestseller: boolean;
+  bestSeller: boolean;
 
   @IsString()
   @IsNotEmpty()
