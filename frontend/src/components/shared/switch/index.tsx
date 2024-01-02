@@ -25,7 +25,7 @@ const CustomToggle: ForwardRefRenderFunction<
   CustomToggleProps
 > = ({ label, question, name, value, onChange, ...rest }, ref) => {
   return (
-    <Switch.Group as="div" className="flex">
+    <Switch.Group as="div" className="flex justify-between md:justify-normal ">
       {question && <p className="text-sm text-gray-600 mr-4">{question}</p>}
       <Switch
         {...rest}
@@ -34,8 +34,8 @@ const CustomToggle: ForwardRefRenderFunction<
         checked={value}
         onChange={onChange}
         className={classNames(
-          value ? "bg-green-600" : "bg-gray-200",
-          "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+          value ? "bg-red-600" : "bg-gray-200",
+          "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
         )}
       >
         <span

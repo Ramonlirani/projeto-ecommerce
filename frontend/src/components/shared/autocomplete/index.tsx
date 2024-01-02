@@ -85,9 +85,7 @@ export function Autocomplete({
                         key={item.id}
                         className={({ active }) =>
                           `cursor-pointer relative select-none py-2 pl-10 pr-4 ${
-                            active
-                              ? "bg-tomilho-700 text-white"
-                              : "text-gray-900"
+                            active ? "bg-black text-white" : "text-gray-900"
                           }`
                         }
                         value={item}

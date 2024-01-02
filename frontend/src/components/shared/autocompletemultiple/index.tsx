@@ -62,7 +62,7 @@ export default function AutocompleteMultiple({
            placeholder:text-gray-400 border-none text-left sm:text-sm "
               >
                 <Combobox.Input
-                  className="block w-full rounded-md border-0 text-gray-700 border-gray-300 h-12 py-3 pl-3 pr-10 text-sm leading-6 ring-gray-300 ring-1 focus:ring-tomilho-600"
+                  className="block w-full rounded-md border-0 text-gray-700 border-gray-300 h-12 py-3 pl-3 pr-10 text-sm leading-6 ring-gray-300 ring-1 focus:ring-black"
                   displayValue={(options: any) =>
                     options
                       .map((subcategory: any) => subcategory?.name)
@@ -99,9 +99,7 @@ export default function AutocompleteMultiple({
                         key={person.id}
                         className={({ active }) =>
                           `cursor-pointer relative select-none py-2 pl-10 pr-4 ${
-                            active
-                              ? "bg-tomilho-600 text-white"
-                              : "text-gray-900"
+                            active ? "bg-black text-white" : "text-gray-900"
                           }`
                         }
                         value={person}
@@ -118,7 +116,7 @@ export default function AutocompleteMultiple({
                             {selected ? (
                               <span
                                 className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                  active ? "text-white" : "text-tomilho-600"
+                                  active ? "text-white" : "text-black"
                                 }`}
                               >
                                 <CheckIcon
