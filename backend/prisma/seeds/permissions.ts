@@ -40,7 +40,7 @@ export async function permissions(prisma: PrismaClient) {
           webUrl: '/system/produto',
           webUrlBase: 'produto',
           modelName: 'product',
-          icon: 'QuestionMarkCircleIcon',
+          icon: 'GiftIcon',
           order: 4,
         },
         {
