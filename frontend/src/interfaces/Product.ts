@@ -11,9 +11,10 @@ export interface Product {
   shortDescription: string;
   description: string;
   active: boolean;
+  launches: boolean;
+  bestSeller: boolean;
   productCategoryId: string;
   imageUrl: string;
-
   category?: ProductCategory;
   subcategories?: SubCategory[];
 

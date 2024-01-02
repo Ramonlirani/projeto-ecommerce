@@ -59,6 +59,8 @@ const schema = z.object({
   shortDescription: z.string().nonempty({ message: "Mensagem é obrigatória" }),
   description: z.string().nonempty({ message: "Mensagem é obrigatória" }),
   active: z.boolean().default(true),
+  launches: z.boolean().default(false),
+  bestSeller: z.boolean().default(false),
   subcategories: z.array(subCategorySchema).default([]),
   imageUrl: z
     .string({
@@ -103,6 +105,8 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       description: product?.description || "",
       shortDescription: product?.shortDescription || "",
       imageUrl: product?.imageUrl || "",
+      launches: get(product, "launches", false),
+      bestSeller: get(product, "bestSeller", false),
       subcategories:
         productCategories?.length > 0
           ? productCategories[0].subcategories?.map((subcategory) => ({
@@ -170,7 +174,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       <form onSubmit={handleSubmit(onSubmit)} className="mt-16">
         <div className="space-y-12">
           <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="col-span-full">
+            <div className="col-span-6 md:col-span-2">
               <Controller
                 control={control}
                 name="active"
@@ -181,6 +185,33 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                   />
                 )}
               />
+            </div>
+
+            <div className="col-span-6 md:col-span-2">
+              <Controller
+                control={control}
+                name="bestSeller"
+                render={({ field: { ref, ...field } }) => (
+                  <Toggle
+                    {...field}
+                    question="Esse produto é um dos mais vendidos?"
+                  />
+                )}
+              />
+            </div>
+            <div className="col-span-6 md:col-span-2">
+              <Controller
+                control={control}
+                name="launches"
+                render={({ field: { ref, ...field } }) => (
+                  <Toggle
+                    {...field}
+                    question="Deseja deixar esse produto como lançamento?"
+                  />
+                )}
+              />
+            </div>
+            <div className="col-span-6 md:col-span-2">
               <InputFileImage
                 isRequired
                 formName="imageUrl"
@@ -188,7 +219,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 error={errors.imageUrl}
               />
             </div>
-            <div className="col-span-full">
+            <div className="col-span-6 sm:col-span-6 flex items-center justify-between">
               <Input
                 isRequired
                 divClasses="w-full"
@@ -197,7 +228,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 error={errors.name}
               />
             </div>
-            <div className="col-span-3 sm:col-span-3 flex items-center justify-between">
+            <div className="col-span-6 sm:col-span-3 flex items-center justify-between">
               <Input
                 isRequired
                 divClasses="w-full"
@@ -206,7 +237,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 error={errors.size}
               />
             </div>
-            <div className="col-span-3 sm:col-span-3 flex items-center justify-between ">
+            <div className="col-span-6 sm:col-span-3 flex items-center justify-between">
               <InputDecimal
                 control={control}
                 isRequired
@@ -217,7 +248,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
               />
             </div>
 
-            <div className="col-span-3 sm:col-span-3 flex items-center justify-between">
+            <div className="col-span-6 sm:col-span-3 flex items-center justify-between">
               <InputDecimal
                 control={control}
                 divClasses="w-full"
@@ -227,7 +258,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
               />
             </div>
 
-            <div className="col-span-3 sm:col-span-3 flex items-center justify-between">
+            <div className="col-span-6 sm:col-span-3 flex items-center justify-between">
               <Input
                 isRequired
                 divClasses="w-full"
@@ -236,7 +267,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 error={errors.color}
               />
             </div>
-            <div className="col-span-3 sm:col-span-3 flex items-center justify-between ">
+            <div className="col-span-6 sm:col-span-3 flex items-center justify-between ">
               <Autocomplete
                 isRequired
                 control={control}
@@ -246,7 +277,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 error={errors.name}
               />
             </div>
-            <div className="col-span-3 sm:col-span-3 flex items-center justify-between ">
+            <div className="col-span-6 sm:col-span-3 flex items-center justify-between">
               <AutocompleteMultiple
                 control={control}
                 options={subcategories}
