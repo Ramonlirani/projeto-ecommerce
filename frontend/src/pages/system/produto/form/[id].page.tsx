@@ -42,7 +42,7 @@ const schema = z.object({
     );
 
     return Number(z.coerce.string().parse(floatValue));
-  }, z.coerce.number({ invalid_type_error: "O valor é obrigatório" }).min(0.01, { message: "O valor mínimo é de R$ 0,01" })),
+  }, z.coerce.number({ invalid_type_error: "O valor é obrigatório" })),
   discount: z.preprocess((a: any) => {
     const value = a.toString();
     const floatValue = parseFloat(
@@ -87,7 +87,8 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
     props.data
   );
 
-  const isEditing = get(product, productCategories, "id");
+  const isEditing = get(product, productCategories + ".id") !== undefined;
+
   const [subcategories, setSubcategories] = useState([]);
 
   const methods = useForm<FormData>({
@@ -144,8 +145,10 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
 
   async function onSubmit(formData: FormData) {
     const newPrice = get(formData, "price", 0);
+    const newDiscount = get(formData, "discount", 0);
 
     formData.price = newPrice * 100;
+    formData.discount = newDiscount * 100;
 
     const subcategoryIds = watch("subcategories");
 
