@@ -32,6 +32,8 @@ export class ProductUseCases {
           productCategoryId: newProduct.productCategoryId,
           imageUrl: newProduct.imageUrl,
           active: newProduct.active,
+          launches: newProduct.launches,
+          bestSeller: newProduct.bestSeller,
         },
       });
 

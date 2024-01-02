@@ -21,6 +21,8 @@ export class ProductFactoryService
     newProduct.productCategoryId = createProductDto.productCategoryId;
     newProduct.imageUrl = createProductDto.imageUrl;
     newProduct.active = get(createProductDto, 'active', true);
+    newProduct.launches = get(createProductDto, 'launches', true);
+    newProduct.bestSeller = get(createProductDto, 'bestSeller', true);
     newProduct.subcategories = createProductDto.subcategories;
 
     return newProduct;
@@ -37,6 +39,8 @@ export class ProductFactoryService
     updateProduct.description = updateProductDto.description;
     updateProduct.productCategoryId = updateProductDto.productCategoryId;
     updateProduct.active = updateProductDto.active;
+    updateProduct.launches = updateProductDto.launches;
+    updateProduct.bestSeller = updateProductDto.bestseller;
     updateProduct.imageUrl = updateProduct.imageUrl;
     updateProduct.subcategories = updateProductDto.subcategories;
 

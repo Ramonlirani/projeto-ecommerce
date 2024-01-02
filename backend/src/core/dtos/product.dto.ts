@@ -41,6 +41,14 @@ export class CreateProductDto {
   @IsNotEmpty()
   active: boolean;
 
+  @IsBoolean()
+  @IsNotEmpty()
+  launches: boolean;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  bestseller: boolean;
+
   @IsString()
   @IsNotEmpty()
   productCategoryId: string;

@@ -10,6 +10,8 @@ export class Product {
   shortDescription: string;
   description: string;
   active: boolean;
+  launches: boolean;
+  bestSeller: boolean;
   productCategoryId: string;
   imageUrl: string;
   subcategories?: Subcategory[];
