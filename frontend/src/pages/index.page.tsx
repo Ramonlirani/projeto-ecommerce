@@ -14,10 +14,12 @@ import { get } from "lodash";
 
 interface PageProps {
   productLaunches: Product[];
+  productBestSeller: Product[];
 }
 
 const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
   const productLaunches = get(props, "productLaunches", []) || [];
+  const productBestSeller = get(props, "productBestSeller", []) || [];
 
   return (
     <div>
@@ -25,7 +27,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
       <DeliveryDetails />
       <Launch productLaunches={productLaunches} />
       <Highlights />
-      <Bestseller />
+      <Bestseller productBestSeller={productBestSeller} />
       <Tips />
     </div>
   );
@@ -36,13 +38,16 @@ Page.getLayout = function getLayout(page: ReactElement) {
 };
 
 export const getServerSideProps = async () => {
-  const { productLaunches } = await fetchJson<any>("/products/launches", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const { productLaunches, productBestSeller } = await fetchJson<any>(
+    "/products/launchesAndBestSeller",
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
-  return { props: { productLaunches } };
+  return { props: { productLaunches, productBestSeller } };
 };
 
 export default Page;
