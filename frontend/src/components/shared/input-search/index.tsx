@@ -20,7 +20,7 @@ export const InputSearch = ({
   };
 
   function getClasses() {
-    return `block w-full rounded-md border-0 text-gray-700 ring-1 ring-gray-300 placeholder:text-gray-300 focus:ring-green-600 focus:ring-1 sm:text-sm sm:leading-6 pr-10`;
+    return `block w-full rounded-md border-0 text-gray-700 ring-1 ring-gray-300 placeholder:text-gray-300 focus:ring-red-600 focus:ring-1 sm:text-sm sm:leading-6 pr-10`;
   }
 
   function handleChange(event: any) {
@@ -43,7 +43,7 @@ export const InputSearch = ({
       >
         <MagnifyingGlassIcon
           className={`h-5 w-5 ${
-            isFilled ? "text-green-600" : "text-gray-400"
+            isFilled ? "text-red-600" : "text-gray-400"
           } opacity-80`}
           aria-hidden="true"
         />
