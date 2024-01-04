@@ -32,17 +32,19 @@ export class ProductController {
   }
 
   @Public()
-  @Get('/launches')
+  @Get('/launchesAndBestSeller')
   async launches(@Res() response: Response) {
     try {
       const productLaunches = await this.productUseCase.getProductLaunches();
+      const productBestSeller = await this.productUseCase.getProductBestSeller();
 
       return response.status(200).json({
         error: false,
         productLaunches,
+        productBestSeller,
       });
     } catch (error) {
-      console.error('Error fetching product launches:', error);
+      console.error('Error fetching product:', error);
       return response.status(500).json({
         error: true,
         message: 'Internal server error',

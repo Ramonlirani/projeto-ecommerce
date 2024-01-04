@@ -110,6 +110,7 @@ export class ProductUseCases {
     const launches = await this.prismaService.product.findMany({
       where: {
         deletedAt: null,
+        launches: true,
       },
       take: 5,
       orderBy: {
@@ -118,6 +119,21 @@ export class ProductUseCases {
     });
 
     return launches;
+  }
+
+  async getProductBestSeller() {
+    const bestSeller = await this.prismaService.product.findMany({
+      where: {
+        deletedAt: null,
+        bestSeller: true,
+      },
+      take: 5,
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    return bestSeller;
   }
 
   async listAll() {
