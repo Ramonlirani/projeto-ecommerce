@@ -1,9 +1,9 @@
-#Projeto de E-Commerce Personalizável
+# Projeto de E-Commerce Personalizável
 
-##Descrição do Projeto
+## Descrição do Projeto
 Bem-vindo ao projeto de e-commerce personalizável! Ainda em desenvolvimento, Este sistema permite que usuários cadastrem-se, naveguem por produtos, adicionem itens ao carrinho de compras e controlem as configurações do site. Além disso, o projeto inclui um sistema de cadastro de funcionários com diferentes níveis de acesso, proporcionando uma administração segura e flexível.
 
-##Funcionalidades Principais
+## Funcionalidades Principais
 1. Cadastro de Usuário
 Os usuários têm a capacidade de criar contas pessoais, fornecendo informações básicas, como nome, endereço e informações de contato. Este cadastro permite aos clientes realizar compras.
 
@@ -31,23 +31,24 @@ Funcionário: Permissões limitadas para gerenciar pedidos e interagir com clien
 
 Cliente: Controle de registro dos clientes podendo acrescentar e remover clientes.
 
-##Tecnologias Utilizadas
+## Tecnologias Utilizadas
 O projeto é construído utilizando tecnologias modernas, como:
 
 Frontend: Next, React, Typescript, TailwindCss, React hook form
 Backend: Nest, Typescript, PrismaORM, sendgrid e Docker
 Banco de Dados: PostgreSQL
 
-##Como Iniciar
+## Como Iniciar
 Siga estas etapas para iniciar o projeto em seu ambiente local:
 
-##Clone este repositório.
+## Clone este repositório.
 Instale as dependências do frontend e backend.
 Configure o banco de dados PostgreSQL e atualize as configurações no arquivo do Prisma ORM.
 Execute o contêiner Docker para o banco de dados.
 Inicie o servidor backend.
 Inicie o aplicativo frontend.
-Contribuições
+
+## Contribuições
 Contribuições são bem-vindas! Sinta-se à vontade para fazer sugestões, relatar problemas ou enviar pull requests para melhorar este projeto.
 
 
