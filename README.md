@@ -40,8 +40,7 @@ Banco de Dados: PostgreSQL
 
 ## Como Iniciar
 Siga estas etapas para iniciar o projeto em seu ambiente local:
-
-## Clone este repositório.
+Clone este repositório
 Instale as dependências do frontend e backend.
 Configure o banco de dados PostgreSQL e atualize as configurações no arquivo do Prisma ORM.
 Execute o contêiner Docker para o banco de dados.
