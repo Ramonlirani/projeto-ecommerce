@@ -106,7 +106,7 @@ export class UserUseCases {
 
       if (!isClient) return newUser;
 
-      // await this.sendWelcomeEmail(newUser);
+      await this.sendWelcomeEmail(newUser);
 
       return newUser;
     });

@@ -25,12 +25,13 @@ export class SendgridService implements IMailService {
 
       const msg = {
         to, // Change to your recipient
-        from: 'recordar@recordar.art.br', // Change to your verified sender
+        from: 'ramonliranidev@gmail.com', // Change to your verified sender
         subject,
         html: templateHTML,
       };
 
       const response = await sgMail.send(msg);
+
       if (response[0].statusCode == 202) {
         return true;
       }

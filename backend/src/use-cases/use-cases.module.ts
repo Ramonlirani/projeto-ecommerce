@@ -29,6 +29,7 @@ import { ProductUseCases } from './product/product.use-case';
   providers: [
     AuthUseCases,
     ConfigurationUseCases,
+    ContactUseCases,
     FaqFactoryService,
     FaqUseCases,
     FaqCategoryUseCases,
@@ -45,11 +46,11 @@ import { ProductUseCases } from './product/product.use-case';
     SubCategoryFactoryService,
     UserFactoryService,
     UserUseCases,
-    ContactUseCases,
   ],
   exports: [
     AuthUseCases,
     ConfigurationUseCases,
+    ContactUseCases,
     FaqFactoryService,
     FaqUseCases,
     FaqCategoryUseCases,
@@ -66,7 +67,6 @@ import { ProductUseCases } from './product/product.use-case';
     SubCategoryFactoryService,
     UserFactoryService,
     UserUseCases,
-    ContactUseCases,
   ],
 })
 export class UseCasesModule {}

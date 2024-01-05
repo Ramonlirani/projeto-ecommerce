@@ -14,7 +14,7 @@ export class ContactUseCases {
       const templatePath = getEmailTemplatePath('contact-us.hbs');
 
       await this.mailService.sendEmail({
-        to: 'recordar@recordar.art.br',
+        to: 'ramonliranidev@gmail.com',
         subject: 'Contato via site',
         variables: {
           name: createContactDto.name,

@@ -17,7 +17,6 @@ export class FileController {
     }),
   )
   async local(@UploadedFile() file: Express.Multer.File) {
-    console.log('sucess');
     return {
       statusCode: 200,
       data: file.path,
