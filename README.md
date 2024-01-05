@@ -35,7 +35,9 @@ Cliente: Controle de registro dos clientes podendo acrescentar e remover cliente
 O projeto é construído utilizando tecnologias modernas, como:
 
 Frontend: Next, React, Typescript, TailwindCss, React hook form
+
 Backend: Nest, Typescript, PrismaORM, sendgrid e Docker
+
 Banco de Dados: PostgreSQL
 
 ## Como Iniciar
