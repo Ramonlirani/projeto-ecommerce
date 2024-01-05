@@ -7,9 +7,7 @@ const prisma = new PrismaClient();
 async function main() {
   try {
     await permissions(prisma);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }
 main()
   .then(async () => {

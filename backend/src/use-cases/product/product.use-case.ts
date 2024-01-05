@@ -50,9 +50,6 @@ export class ProductUseCases {
 
       return savedProduct;
     } catch (error) {
-      console.log('error', error);
-
-      console.error('Error saving product to the database:', error);
       throw new Error('Failed to save product to the database');
     }
   }
