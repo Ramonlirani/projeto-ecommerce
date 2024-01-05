@@ -46,6 +46,7 @@ Siga estas etapas para iniciar o projeto em seu ambiente local:
 4. Execute o contêiner Docker para o banco de dados.
 5. Inicie o servidor backend.
 6. Inicie o aplicativo frontend.
+7. Qualquer duvida entre em contato comigo atraves das minhas redes sociais fixadas no perfil do github.
 
 ## Contribuições
 Contribuições são bem-vindas! Sinta-se à vontade para fazer sugestões, relatar problemas ou enviar pull requests para melhorar este projeto.
