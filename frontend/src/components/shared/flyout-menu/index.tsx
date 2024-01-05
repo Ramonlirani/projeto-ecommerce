@@ -315,8 +315,6 @@ interface FlyoutMenuProps {
 }
 
 export function FlyoutMenu({ product, launches }: FlyoutMenuProps) {
-  console.log(product);
-
   const desiredCategories = [
     "camisa",
     "calça",
