@@ -198,21 +198,20 @@ model ResetPassword {
 }
 
 model User {
-  id             String    @id @default(uuid())
-  name           String    @db.VarChar(255)
-  email          String    @unique() @db.VarChar(255)
-  username       String?   @db.VarChar(255)
-  phoneNumber    String?   @map("phone_number")
-  document       String?
-  perfilPhotoUrl String?   @map("perfil_photo_url")
-  password       String    @db.VarChar(255)
-  active         Boolean   @default(true)
-  roleCode       String    @default("client") @db.VarChar(15)
-  verifiedAt     DateTime? @map("verified_at")
-  createdAt      DateTime  @default(now()) @map("created_at")
-  updateAt       DateTime? @updatedAt @map("updated_at")
-  deletedAt      DateTime? @map("deleted_at")
-  lastLogin      DateTime? @map("last_login")
+  id          String    @id @default(uuid())
+  name        String    @db.VarChar(255)
+  email       String    @unique() @db.VarChar(255)
+  username    String?   @db.VarChar(255)
+  phoneNumber String?   @map("phone_number")
+  document    String?
+  password    String    @db.VarChar(255)
+  active      Boolean   @default(true)
+  roleCode    String    @default("client") @db.VarChar(15)
+  verifiedAt  DateTime? @map("verified_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updateAt    DateTime? @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+  lastLogin   DateTime? @map("last_login")
 
   roleId String @map("role_id")
   role   Role   @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user_has_role1")

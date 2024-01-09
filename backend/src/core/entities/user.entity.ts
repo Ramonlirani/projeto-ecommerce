@@ -2,7 +2,7 @@ import { MenuItem } from './menu-item.entity';
 
 export class User {
   id?: string;
-  perfilPhotoUrl?: string;
+
   name: string;
   email: string;
   username: string;

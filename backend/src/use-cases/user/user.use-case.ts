@@ -168,7 +168,7 @@ export class UserUseCases {
     }
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<string> {
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<void> {
     const document = get(updateUserDto, 'document');
 
     if (document && !validateCPFCNPJ(document)) {
@@ -180,33 +180,14 @@ export class UserUseCases {
     await this.validateUniqueInformation(currentUser, updateUserDto);
     const user = this.userFactoryService.updateUser(updateUserDto);
 
-    let imageNotChanged = null;
-    let perfilPhotoUrl = null;
-
-    if (!isEmpty(updateUserDto.perfilPhotoUrl)) {
-      imageNotChanged = updateUserDto.perfilPhotoUrl.includes(
-        `https://${env.AWS_BUCKET_NAME}.s3`,
-      );
-
-      perfilPhotoUrl = updateUserDto.perfilPhotoUrl;
-      if (!imageNotChanged) {
-        perfilPhotoUrl = await this.fileUseCase.uploadBase64ToS3(
-          updateUserDto.perfilPhotoUrl,
-          id,
-        );
-      }
-    }
-
     try {
       await this.prismaService.user.update({
         where: { id },
-        data: { ...user, perfilPhotoUrl },
+        data: { ...user },
       });
     } catch (error) {
       throw genericError;
     }
-
-    return perfilPhotoUrl;
   }
 
   async pagination(paginationOptions: PaginationOptionsDto, user: User) {

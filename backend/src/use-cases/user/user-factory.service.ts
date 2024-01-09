@@ -22,7 +22,6 @@ export class UserFactoryService {
 
   updateUser(updateUserDto: UpdateUserDto) {
     const newUser = new User();
-    newUser.perfilPhotoUrl = updateUserDto.perfilPhotoUrl;
     newUser.name = updateUserDto.name;
     newUser.email = updateUserDto.email;
     newUser.username = updateUserDto.username;

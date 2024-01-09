@@ -34,10 +34,10 @@ export class UserController {
     @Res() response: Response,
     @Param('id') id: string,
   ) {
-    const perfilPhotoUrl = await this.userUseCase.update(id, updateUserDto);
+    const updatePerfil = await this.userUseCase.update(id, updateUserDto);
     return response.status(200).json({
       error: false,
-      perfilPhotoUrl,
+      updatePerfil,
     });
   }
 

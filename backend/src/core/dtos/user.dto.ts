@@ -34,10 +34,6 @@ export class CreateUserDto {
   @IsOptional()
   isAdminCreating?: boolean;
 
-  @IsString()
-  @IsOptional()
-  perfilPhotoUrl?: string;
-
   @ApiPropertyOptional({
     default: 'client',
   })
@@ -70,10 +66,6 @@ export class UpdateUserDto {
   @IsString()
   @IsOptional()
   document?: string;
-
-  @IsString()
-  @IsOptional()
-  perfilPhotoUrl?: string;
 
   @IsString()
   @IsOptional()
