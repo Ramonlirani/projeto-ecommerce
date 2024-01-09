@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import { GetServerSidePropsContext, NextApiRequest } from "next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,8 +22,6 @@ import { Input } from "@/components/shared/input";
 import { Button } from "@/components/shared/button";
 import { PageTitle } from "@/components/shared/page-title";
 import { InputMask } from "@/components/shared/input-mask";
-import { InputFileImage } from "@/components/shared/input-file-image";
-import { Avatar } from "@/components/shared/avatar";
 import fetchJson from "@/lib/fetch-json";
 
 import { useResetFileInformation } from "@/hooks/zustand/reset-file-information";
@@ -47,8 +45,6 @@ const schema = z
       .nonempty({ message: "Nome de usuário é obrigatório" }),
     password: z.string().optional().nullable(),
     confirmPassword: z.string().optional().nullable(),
-    codeIndicatedBy: z.string().optional().nullable(),
-    perfilPhotoUrl: z.string().optional().nullable(),
   })
   .refine((schema) => !(schema.password && schema.password.length < 8), {
     message: "A senha deve ter pelo menos 8 caracteres",
@@ -80,10 +76,6 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
   const { setShowing, setOnConfirm } = useShowConfirmation();
   const { user } = decryptJSON<PageDecryptedProps>(props.data);
   const { resetFileInformation } = useResetFileInformation();
-  const perfilPhotoUrlTime = user.perfilPhotoUrl
-    ? `${user.perfilPhotoUrl}?t=${new Date().getTime()}`
-    : null;
-  const [perfilPhotoUrl, setPerfilPhotoUrl] = useState(perfilPhotoUrlTime);
 
   const methods = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -108,11 +100,6 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
     });
 
     if (!response.error) {
-      if (response.perfilPhotoUrl) {
-        setPerfilPhotoUrl(
-          response.perfilPhotoUrl + `?t=${new Date().getTime()}`
-        );
-      }
       resetField("password");
       resetField("confirmPassword");
       resetFileInformation();
@@ -152,33 +139,9 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
         </p>
       </div>
 
-      <div className="mt-16">
-        <p className="text-gray-600 text-lg">
-          Meu código de indicação:
-          <span className="ml-2 text-green-600 font-bold">
-            {user.codeToIndicate}
-          </span>
-        </p>
-        <p className="text-sm text-red-600">
-          * Este código é o responsável por criar um vinculo entre você e a
-          pessoa indicada nos circuitos
-        </p>
-      </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-16">
         <div className="space-y-12">
           <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-6">
-            <div className="flex gap-4 items-center col-span-full mb-3">
-              <Avatar
-                key={perfilPhotoUrl}
-                name={user.name}
-                photoUrl={perfilPhotoUrl}
-              />
-              <InputFileImage
-                formName="perfilPhotoUrl"
-                setValue={setValue}
-                error={errors.perfilPhotoUrl}
-              />
-            </div>
             <Input
               divClasses="sm:col-span-3 mb-3"
               label="Nome"
