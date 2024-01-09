@@ -23,6 +23,7 @@ import { Autocomplete } from "@/components/shared/autocomplete";
 import { getHeaders } from "@/helpers/get-headers";
 import fetchJson from "@/lib/fetch-json";
 import { InputCpfCnpj } from "@/components/shared/input-cpf-cnpj";
+import { InputMask } from "@/components/shared/input-mask";
 
 const schema = z
   .object({
@@ -33,6 +34,9 @@ const schema = z
     document: z.string().optional().nullable(),
     isAdminCreating: z.boolean().default(true),
     roleCode: z.string().optional().nullable(),
+    phoneNumber: z
+      .string()
+      .nonempty({ message: "Número do telefone é obrigatório" }),
     email: z
       .string()
       .email({ message: "E-mail inválido" })
@@ -42,7 +46,6 @@ const schema = z
       .min(6, { message: "informe pelo menos 6 caracteres" })
       .nonempty({ message: "Nome de usuário é obrigatório" }),
     password: z.string().optional().nullable(),
-    codeIndicatedBy: z.string().optional().nullable(),
     isEditing: z.boolean().default(false),
     active: z.boolean().default(true),
     roleId: z
@@ -86,6 +89,7 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
   const methods = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
+      phoneNumber: "",
       ...user,
       isEditing,
       roleId: user.roleId || roles[0].id,
@@ -159,16 +163,6 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
                 error={errors.roleId}
               />
             </div>
-            <div className="sm:col-span-3">
-              {role.code === "client" ? (
-                <Input
-                  disabled={isEditing}
-                  error={errors.codeIndicatedBy}
-                  label="Código de indicação"
-                  {...register("codeIndicatedBy")}
-                />
-              ) : null}
-            </div>
 
             <Input
               isRequired
@@ -198,7 +192,15 @@ const Page: NextPageWithLayout<PageProps> = (props: PageProps) => {
               {...register("email")}
               error={errors.email}
             />
-
+            <InputMask
+              control={control}
+              name="phoneNumber"
+              divClasses="col-span-1 sm:col-span-3"
+              label="Número do telefone"
+              placeholder="(22) 22222-2222"
+              format="(##) #####-####"
+              error={errors.phoneNumber}
+            />
             <Input
               isRequired
               divClasses="col-span-1 sm:col-span-3"
