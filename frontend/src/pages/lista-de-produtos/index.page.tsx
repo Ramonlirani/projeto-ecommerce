@@ -203,6 +203,15 @@ const Page: NextPageWithLayout = () => {
                                         defaultValue={option.value}
                                         type="checkbox"
                                         className="h-4 w-4 rounded border-gray-300 text-off-red focus:ring-off-red"
+                                        onChange={() => {
+                                          // Ensure that option.value is defined before calling handleSelection
+                                          if (option.value !== undefined) {
+                                            handleSelection(
+                                              option.value,
+                                              section.id as FilterType
+                                            );
+                                          }
+                                        }}
                                       />
                                       <label
                                         htmlFor={`${section.id}-${optionIdx}-mobile`}
